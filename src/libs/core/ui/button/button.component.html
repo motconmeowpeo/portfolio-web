@@ -1,0 +1,11 @@
+<div
+  class="bg-gradient-to-r from-secondary to-primary h-10 min-w-[132px] flex items-center justify-center"
+>
+  <button
+    class="h-9 w-32 py-4 px-4 bg-header-color text-white-text flex items-center justify-evenly hover:bg-transparent duration-300 transition-all"
+    [ngClass]="className"
+  >
+    <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
+    <span>{{ content }}</span>
+  </button>
+</div>

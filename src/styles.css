@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/aos/dist/aos.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  /* overflow-x: hidden; */
+}
+body {
+  background-color: #111111;
+}
+
+/* total width */
+*::-webkit-scrollbar {
+  background-color: #fff;
+  width: 10px;
+  height: 10px;
+}
+
+/* background of the scrollbar except button or resizer */
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* scrollbar itself */
+*::-webkit-scrollbar-thumb {
+  background-color: #e5e5e5;
+  border-radius: 16px;
+  border: 2px solid #fff;
+}
+
+/* set button(top and bottom of the scrollbar) */
+*::-webkit-scrollbar-button {
+  display: none;
+}
+
+.active-router {
+  color: #ceff1a;
+}
