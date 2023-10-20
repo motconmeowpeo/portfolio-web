@@ -1,13 +1,105 @@
 <app-header></app-header>
-<div class="relative h-[2000px]">
-  <video
-    class="object-cover w-full h-banner"
-    autoplay
-    [muted]="'muted'"
-    loop
-    playsInline
-  >
-    <source src="assets/video/video.mp4" type="video/mp4" />
-    <source src="assets/video/video.mp4" type="video/ogg" />
-  </video>
+<div class="relative">
+  <div class="relative h-banner w-full">
+    <video
+      class="object-cover w-full h-full"
+      autoplay
+      [muted]="'muted'"
+      loop
+      playsInline
+    >
+      <source src="assets/video/video.mp4" type="video/mp4" />
+      <source src="assets/video/video.mp4" type="video/ogg" />
+    </video>
+    <!-- Intro -->
+    <div
+      class="intro absolute top-0 left-0 right-0 bottom-0 max-w-7xl m-auto w-full z-10 translate-y-[30%]"
+    >
+      <div class="max-w-md">
+        <h1
+          class="text-transparent text-7xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text"
+        >
+          Hello Guys! I'm Nika.
+        </h1>
+        <span class="text-white-text mt-5 text-lg"
+          >I am an enthusiast of technology and developer. My work is related to
+          digital solutions that can help you achieve better results.</span
+        >
+        <div class="mt-5">
+          <app-button [icon]="faMugHot" content="GET STARTED"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-20 w-full h-fit flex flex-col">
+    <app-horizontal class="" [selfRight]="true"></app-horizontal>
+    <div class="mt-20 w-full max-w-7xl m-auto">
+      <!-- SKILL -->
+      <div class="flex flex-col">
+        <span
+          class="text-transparent text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5"
+        >
+          <span
+            class="w-1/2 h-1 bg-gradient-to-r from-secondary to-primary absolute z-10 top-0"
+          ></span>
+          My Skills
+        </span>
+        <span class="text-white-text text-lg"
+          >Focused on results i seek to raise the level of myself.</span
+        >
+      </div>
+
+      <!-- My Skill -->
+      <div
+        class="parent z-0 grid grid-cols-3 gap-4 mt-5 relative pb-4 pr-4 pt-1 pl-1"
+      >
+        <div class="col-span-1 m-4" *ngFor="let item of SKILLS">
+          <app-skill-item
+            [name]="item.name"
+            [desc]="item.desc"
+            [icon]="item.icon"
+            [color]="item.color"
+          ></app-skill-item>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-20 w-full h-fit flex flex-col">
+    <app-horizontal class="" [selfRight]="false"></app-horizontal>
+    <div class="mt-20 w-full max-w-7xl m-auto flex flex-col">
+      <!-- SKILL -->
+      <div class="flex flex-col self-end">
+        <span
+          class="text-transparent text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5"
+        >
+          <span
+            class="w-1/2 h-1 bg-gradient-to-r from-secondary to-primary absolute z-10 top-0"
+          ></span>
+          Let's feedback
+        </span>
+        <span class="text-white-text text-lg"
+          >If you have any questions or anything want to give me. Don't be
+          shy</span
+        >
+      </div>
+      <div class="flex flex-col w-full">
+        <input
+          class="mt-10 h-15 p-4 rounded-md outline-none"
+          type="text"
+          placeholder="Your name if you want"
+        />
+        <input
+          class="mt-10 h-15 p-4 rounded-md outline-none"
+          type="text"
+          placeholder="Give me and don' be shy"
+        />
+        <div class="mt-10">
+          <app-button content="SEND" [icon]="faPaperPlane"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-20 w-full max-w-7xl m-auto">
+    <app-footer></app-footer>
+  </div>
 </div>

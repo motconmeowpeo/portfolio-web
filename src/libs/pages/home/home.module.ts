@@ -2,7 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
-import { HeaderComponent } from '@core/components';
+import { FooterComponent, HeaderComponent } from '@core/components';
+import {
+  ButtonComponent,
+  HorizontalComponent,
+  SkillItemComponent,
+} from '@core/ui';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
   {
@@ -12,7 +18,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes), HeaderComponent],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    HeaderComponent,
+    ButtonComponent,
+    FontAwesomeModule,
+    HorizontalComponent,
+    SkillItemComponent,
+    FooterComponent,
+  ],
   declarations: [HomeComponent],
 })
 export class HomeModule {}

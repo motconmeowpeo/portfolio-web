@@ -1,1 +1,18 @@
-
+.parent:after {
+  content: "";
+  position: absolute;
+  height: 20%;
+  width: 20%;
+  border-left: 10px solid #ceff1a;
+  border-top: 10px solid #ceff1a;
+}
+.parent:before {
+  content: "";
+  position: absolute;
+  height: 20%;
+  width: 20%;
+  bottom: 0;
+  right: 0;
+  border-right: 10px solid #dd1e4b;
+  border-bottom: 10px solid #dd1e4b;
+}

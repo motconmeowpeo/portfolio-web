@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
   constructor(private cd: ChangeDetectorRef) {}
   readonly NAV_MENU = [
     { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/about' },
     { name: 'Blog', path: 'blog' },
   ];
   readonly NAV_ICON = [
