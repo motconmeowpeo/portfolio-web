@@ -1,4 +1,3 @@
-<app-header></app-header>
 <div class="relative">
   <div class="relative h-banner w-full">
     <video
@@ -22,16 +21,20 @@
           Hello Guys! I'm Nika.
         </h1>
         <span class="text-white-text mt-5 text-lg"
-          >I am an enthusiast of technology and developer. My work is related to
+          >I am an enthusiast of technology and develop. My work is related to
           digital solutions that can help you achieve better results.</span
         >
         <div class="mt-5">
-          <app-button [icon]="faMugHot" content="GET STARTED"></app-button>
+          <app-button
+            [icon]="faMugHot"
+            content="GET STARTED"
+            (event)="gotoSkills()"
+          ></app-button>
         </div>
       </div>
     </div>
   </div>
-  <div class="mt-20 w-full h-fit flex flex-col">
+  <div #skill class="mt-20 w-full h-fit flex flex-col">
     <app-horizontal class="" [selfRight]="true"></app-horizontal>
     <div class="mt-20 w-full max-w-7xl m-auto">
       <!-- SKILL -->
@@ -64,34 +67,33 @@
       </div>
     </div>
   </div>
-  <div class="mt-20 w-full h-fit flex flex-col">
+  <div #message class="mt-20 w-full h-fit flex flex-col">
     <app-horizontal class="" [selfRight]="false"></app-horizontal>
     <div class="mt-20 w-full max-w-7xl m-auto flex flex-col">
-      <!-- SKILL -->
-      <div class="flex flex-col self-end">
+      <!-- SEND -->
+      <div class="flex flex-col self-end w-1/2">
         <span
           class="text-transparent text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5"
         >
           <span
-            class="w-1/2 h-1 bg-gradient-to-r from-secondary to-primary absolute z-10 top-0"
+            class="send-message w-full h-1 bg-gradient-to-r from-secondary to-primary absolute z-10 top-0"
           ></span>
-          Let's feedback
+          Let's send message
         </span>
         <span class="text-white-text text-lg"
-          >If you have any questions or anything want to give me. Don't be
-          shy</span
+          >Don't wait until tomorrow. Let's send message to me</span
         >
       </div>
       <div class="flex flex-col w-full">
         <input
-          class="mt-10 h-15 p-4 rounded-md outline-none"
+          class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
           type="text"
           placeholder="Your name if you want"
         />
         <input
-          class="mt-10 h-15 p-4 rounded-md outline-none"
+          class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
           type="text"
-          placeholder="Give me and don' be shy"
+          placeholder="Let's send message"
         />
         <div class="mt-10">
           <app-button content="SEND" [icon]="faPaperPlane"></app-button>
@@ -99,7 +101,7 @@
       </div>
     </div>
   </div>
-  <div class="mt-20 w-full max-w-7xl m-auto">
-    <app-footer></app-footer>
+  <div class="py-20 bg-header-color mt-20">
+    <app-footer (goToSend)="gotoSendMessage()"></app-footer>
   </div>
 </div>

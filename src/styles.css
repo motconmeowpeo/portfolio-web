@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/aos/dist/aos.css";
+@import "../node_modules/ng-zorro-antd/ng-zorro-antd.min.css";
 
 @tailwind base;
 @tailwind components;
@@ -13,7 +14,7 @@ html {
   /* overflow-x: hidden; */
 }
 body {
-  background-color: #111111;
+  background-color: #040402;
 }
 
 /* total width */

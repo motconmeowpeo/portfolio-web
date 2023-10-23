@@ -19,10 +19,12 @@ export class AppComponent implements OnInit {
   onMouseMove(event: any) {
     this.cursorRef.nativeElement.style.left = `${event.pageX}px`;
     this.cursorRef.nativeElement.style.top = `${event.pageY}px`;
+    this.cursorRef.nativeElement.style.display = `block`;
   }
   @HostListener('document:scroll', ['$event'])
   onScroll(event: any) {
     this.cursorRef.nativeElement.style.left = `${event.pageX}px`;
     this.cursorRef.nativeElement.style.top = `${event.pageY}px`;
+
   }
 }

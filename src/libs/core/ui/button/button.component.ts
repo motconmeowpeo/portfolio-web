@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconDefinition, faRocket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -12,7 +12,12 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ButtonComponent {
   @Input() content!: string;
-  @Input() className!: string;
-  @Input() type = 'primary';
+  @Input() className: string = 'h-14';
+  @Input() type: string = 'primary';
   @Input() icon!: IconDefinition;
+  @Output() event: EventEmitter<any> = new EventEmitter();
+
+  buttonClickEvt() {
+    this.event.emit();
+  }
 }

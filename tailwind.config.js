@@ -13,7 +13,10 @@ module.exports = {
         "global": "#999999",
         "header-color": "#111111",
         "white-text": "#F5F5F5",
-        "item-color": "#191919"
+        "item-color": "#191919",
+        "galaxy-from": '#150011',
+        "galaxy-to": '#900a64',
+        "border-color": '#434341'
       },
       boxShadow: {
         base: '0 0 30px rgb(0 0 0 / 5%)',
