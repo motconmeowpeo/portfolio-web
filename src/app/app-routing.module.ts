@@ -15,6 +15,11 @@ const routes: Routes = [
     path: 'blog',
     loadChildren: () => import('@pages/blogs').then((page) => page.BlogsModule),
   },
+  {
+    path: 'post/:id',
+    loadChildren: () =>
+      import('@pages/post-detail').then((page) => page.PostDetailModule),
+  },
 ];
 
 @NgModule({

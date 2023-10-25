@@ -1,0 +1,53 @@
+::ng-deep .ant-pagination-item {
+  background-image: linear-gradient(to right, #dd1e4b, #ceff1a);
+  border: none;
+  padding: 2px;
+}
+::ng-deep .ant-pagination-item a {
+  color: white;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+::ng-deep .ant-pagination-item:hover a {
+  color: white;
+  background-image: linear-gradient(to right, #dd1e4b, #ceff1a);
+  transition: all 1s;
+}
+
+::ng-deep .ant-pagination-item-active a {
+  background-image: linear-gradient(to right, #dd1e4b, #ceff1a);
+}
+
+::ng-deep .ant-pagination-item-ellipsis {
+  color: white !important;
+}
+
+::ng-deep .ant-pagination-item-link {
+  background-color: black !important;
+  color: white;
+  height: 100%;
+}
+
+::ng-deep .ant-pagination-next .ant-pagination-item-link,
+::ng-deep .ant-pagination-prev .ant-pagination-item-link {
+  color: white !important;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+::ng-deep .ant-pagination-next .ant-pagination-item-link:hover,
+::ng-deep .ant-pagination-prev .ant-pagination-item-link:hover {
+  border-color: #dd1e4b !important;
+}
+
+::ng-deep
+  .ant-pagination-jump-next
+  .ant-pagination-item-container
+  .ant-pagination-item-link-icon,
+::ng-deep
+  .ant-pagination-jump-prev
+  .ant-pagination-item-container
+  .ant-pagination-item-link-icon {
+  color: white !important;
+}

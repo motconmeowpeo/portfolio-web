@@ -15,7 +15,8 @@ export class ButtonComponent {
   @Input() className: string = 'h-14';
   @Input() type: string = 'primary';
   @Input() icon!: IconDefinition;
-  @Output() event: EventEmitter<any> = new EventEmitter();
+  @Input() disabled = false;
+  @Output() event: EventEmitter<void> = new EventEmitter();
 
   buttonClickEvt() {
     this.event.emit();

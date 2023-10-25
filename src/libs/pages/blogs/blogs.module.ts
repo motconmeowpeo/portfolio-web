@@ -2,8 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlogsComponent } from './blogs.component';
 import { RouterModule, Routes } from '@angular/router';
-import { FooterComponent } from '@core/components';
+import { FooterComponent, PostItemComponent } from '@core/components';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { ButtonComponent } from '@core/ui';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 const routes: Routes = [
   {
@@ -17,7 +21,12 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FooterComponent,
+    NzPaginationModule,
+    PostItemComponent,
     NzImageModule,
+    RouterModule,
+    ButtonComponent,
+    FontAwesomeModule,
   ],
   declarations: [BlogsComponent],
 })

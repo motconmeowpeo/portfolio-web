@@ -1,0 +1,8 @@
+::ng-deep .ant-image-preview-img {
+  display: inline !important;
+}
+
+::ng-deep .ant-image-preview-operations li {
+  /* top: 100% !important; */
+  background-image: linear-gradient(to right, #ceff1a, #dd1e4b) !important;
+}

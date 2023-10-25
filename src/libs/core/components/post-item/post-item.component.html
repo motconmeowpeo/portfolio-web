@@ -1,0 +1,44 @@
+<div class="post">
+  <section
+    class="flex relative group cursor-pointer"
+    [routerLink]="['/post/' + post.id]"
+  >
+    <div class="image h-96 w-full">
+      <img
+        *ngIf="post.images && post.images?.length"
+        [src]="post.images[0]"
+        alt=""
+        class="h-full w-full overflow-hidden object-cover"
+      />
+      <img
+        *ngIf="!post.images || !post.images.length"
+        src="assets/common/news-1.webp"
+        alt=""
+        class="h-full w-full overflow-hidden object-cover"
+      />
+    </div>
+    <div
+      class="overlay absolute top-0 bottom-0 left-0 right-0 bg-black opacity-70 z-1 group-hover:opacity-90 duration-300 transition-all"
+    ></div>
+    <div
+      class="info flex flex-col ml-2 justify-between top-0 left-0 bottom-0 right-0 absolute p-4"
+    >
+      <div class="flex flex-col justify-center h-full">
+        <span class="text-white-text text-xl font-semibold self-center">{{
+          post.title
+        }}</span>
+        <span
+          class="text-global inline-block w-full truncate self-center text-center"
+          >{{ post.description }}</span
+        >
+      </div>
+      <div class="flex justify-between w-full">
+        <div class="text-white-text text-sm">
+          <fa-icon [icon]="faUser"></fa-icon>
+          <span class="ml-2">{{ post.createBy.username }}</span>
+        </div>
+        <div class="text-white text-xs">{{ post.createAt }}</div>
+      </div>
+    </div>
+  </section>
+</div>

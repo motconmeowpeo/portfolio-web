@@ -11,7 +11,6 @@ import { OUR_SERVICES, POPULAR_TAGS } from '../../constants/menu.constant';
   standalone: true,
   imports: [CommonModule, FontAwesomeModule, ButtonComponent],
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent {
   readonly NAV_ICON = NAV_ICON;
@@ -22,7 +21,6 @@ export class FooterComponent {
   @Output() goToSend: EventEmitter<void> = new EventEmitter<void>();
 
   scrollTo() {
-    console.log('=====');
     window.scrollTo({
       top: 2000,
       left: 0,

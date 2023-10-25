@@ -5,7 +5,12 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { faMugHot, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBriefcase,
+  faMugHot,
+  faPaperPlane,
+  faSchool,
+} from '@fortawesome/free-solid-svg-icons';
 import { fromEvent } from 'rxjs';
 import * as AOS from 'aos';
 import {
@@ -14,6 +19,7 @@ import {
   faReact,
 } from '@fortawesome/free-brands-svg-icons';
 import { ActivatedRoute } from '@angular/router';
+import { faHospital } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -23,44 +29,46 @@ import { ActivatedRoute } from '@angular/router';
 export class HomeComponent implements OnInit, AfterViewInit {
   readonly faMugHot = faMugHot;
   readonly faPaperPlane = faPaperPlane;
+  readonly faSchool = faHospital;
+  readonly faBrief = faBriefcase;
   @ViewChild('skill') skill!: ElementRef<HTMLDivElement>;
   @ViewChild('message') message!: ElementRef<HTMLDivElement>;
   readonly SKILLS = [
     {
       name: 'Angular',
-      desc: 'We build professional responsive websites optimized for the most popular search engines.',
+      desc: 'I build professional responsive websites optimized for the most popular search engines.',
       icon: 'angular.png',
       color: '#f60202',
     },
 
     {
       name: 'React',
-      desc: 'We build professional responsive websites optimized for the most popular search engines.',
+      desc: 'I build professional responsive websites optimized for the most popular search engines.',
       icon: 'react.png',
       color: '#5ed3f3',
     },
 
     {
       name: 'NestJs',
-      desc: 'We build professional responsive websites optimized for the most popular search engines.',
+      desc: 'I build professional responsive websites optimized for the most popular search engines.',
       icon: 'nestjs.svg',
       color: '#1d63ed',
     },
     {
       name: 'Docker',
-      desc: 'We build professional responsive websites optimized for the most popular search engines.',
+      desc: 'I build professional responsive websites optimized for the most popular search engines.',
       icon: 'docker.png',
       color: '#1d63ed',
     },
     {
       name: 'Mongodb',
-      desc: 'We build professional responsive websites optimized for the most popular search engines.',
+      desc: 'I build professional responsive websites optimized for the most popular search engines.',
       icon: 'mongodb.png',
       color: '#1d63ed',
     },
     {
       name: 'Postgres',
-      desc: 'We build professional responsive websites optimized for the most popular search engines.',
+      desc: 'I build professional responsive websites optimized for the most popular search engines.',
       icon: 'postgres.png',
       color: '#1d63ed',
     },

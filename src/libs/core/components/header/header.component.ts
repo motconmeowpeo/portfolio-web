@@ -27,7 +27,6 @@ import { NAV_ICON, NAV_MENU } from '@core/constants';
     RouterModule,
   ],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   @ViewChild('header') header!: ElementRef<HTMLDivElement>;

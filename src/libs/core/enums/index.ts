@@ -1,1 +1,1 @@
-export * from '../components/header/header.component'
+export * from './common.enum';

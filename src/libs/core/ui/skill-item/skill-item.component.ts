@@ -8,15 +8,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   standalone: true,
   imports: [CommonModule, FontAwesomeModule],
   templateUrl: './skill-item.component.html',
-  styleUrls: ['./skill-item.component.css'],
 })
 export class SkillItemComponent {
   @Input() name!: string;
   @Input() desc!: string;
-  @Input() icon!: any;
+  @Input() icon!: string;
   @Input() color!: string;
-
-  public checkIsString() {
-    return typeof this.icon === 'string';
-  }
 }

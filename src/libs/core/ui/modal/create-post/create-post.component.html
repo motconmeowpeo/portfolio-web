@@ -1,0 +1,61 @@
+<div class="create-post py-4 flex flex-col">
+  <div class="border-b border-primary p-4 w-full">
+    <span
+      class="text-transparent text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative"
+    >
+      Create post
+    </span>
+  </div>
+
+  <form [formGroup]="formCreate" class="flex flex-col">
+    <input
+      class="mt-10 h-15 p-4 border-primary border outline-primary rounded-md mx-4"
+      type="text"
+      placeholder="Title*"
+      id="title"
+      formControlName="title"
+    />
+    <textarea
+      class="h-40 p-4 mt-5 pt-2 border-primary border outline-primary rounded-md mx-4"
+      type="text"
+      placeholder="Your post"
+      autofocus
+      formControlName="description"
+    ></textarea>
+    <label
+      class="group cursor-pointer p-4 h-14 mt-5 bg-gradient-to-r from-secondary to-primary py-1 px-1 flex items-center justify-center font-semibold text-white"
+      for="upload-photo"
+    >
+      <span
+        class="ml-3 text-black group-hover:text-white duration-300 transition-all"
+        >UPLOAD</span
+      >
+      <fa-icon
+        [icon]="faImage"
+        class="text-black text-2xl ml-4 rotate-12 group-hover:text-white duration-300 transition-all"
+      ></fa-icon>
+    </label>
+
+    <input
+      class="opacity-0"
+      type="file"
+      name="photo"
+      id="upload-photo"
+      multiple
+      accept="image/*"
+      (input)="onInputFile($event)"
+    />
+    <div class="grid grid-cols-3 gap-2">
+      <img
+        class="border max-h-44 h-auto w-full"
+        *ngFor="let item of preview"
+        [src]="item"
+        alt=""
+        srcset=""
+      />
+    </div>
+    <div class="self-end mr-4">
+      <app-button content="POST" [disabled]="formCreate.invalid"></app-button>
+    </div>
+  </form>
+</div>

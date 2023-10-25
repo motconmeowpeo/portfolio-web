@@ -1,1 +1,1 @@
-export * from'./menu.constant'
+export * from './menu.constant';
