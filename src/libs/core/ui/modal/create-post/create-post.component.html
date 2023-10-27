@@ -1,4 +1,6 @@
-<div class="create-post py-4 flex flex-col">
+<div
+  class="create-post py-4 flex flex-col h-full w-full overflow-auto bg-white"
+>
   <div class="border-b border-primary p-4 w-full">
     <span
       class="text-transparent text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative"
@@ -8,22 +10,44 @@
   </div>
 
   <form [formGroup]="formCreate" class="flex flex-col">
-    <input
-      class="mt-10 h-15 p-4 border-primary border outline-primary rounded-md mx-4"
-      type="text"
-      placeholder="Title*"
-      id="title"
-      formControlName="title"
-    />
-    <textarea
-      class="h-40 p-4 mt-5 pt-2 border-primary border outline-primary rounded-md mx-4"
-      type="text"
-      placeholder="Your post"
-      autofocus
-      formControlName="description"
-    ></textarea>
+    <div class="mt-10 mx-4 flex flex-col">
+      <textarea
+        class="h-15 p-4 w-full rounded-md"
+        [ngClass]="
+          formCreate.controls.title.hasError('required') ||
+          formCreate.controls.title.hasError('pattern')
+            ? 'border-primary border outline-primary'
+            : 'border-primary-color border outline-primary-color'
+        "
+        type="text"
+        placeholder="Title*"
+        id="title"
+        formControlName="title"
+      ></textarea>
+      <span
+        *ngIf="formCreate.controls.title.hasError('required')"
+        class="text-red-500 text-xs"
+      >
+        This field is required</span
+      >
+      <span
+        *ngIf="formCreate.controls.title.hasError('pattern')"
+        class="text-red-500 text-xs"
+      >
+        Title should be text and number</span
+      >
+    </div>
+    <div class="mt-5 p-4 pt-2">
+      <ckeditor [formControl]="formCreate.controls.description"></ckeditor>
+      <span
+        *ngIf="formCreate.controls.description.hasError('required')"
+        class="text-red-500 text-xs"
+      >
+        This field is required</span
+      >
+    </div>
     <label
-      class="group cursor-pointer p-4 h-14 mt-5 bg-gradient-to-r from-secondary to-primary py-1 px-1 flex items-center justify-center font-semibold text-white"
+      class="group w-fit cursor-pointer p-4 ml-4 h-14 mt-5 bg-gradient-to-r from-secondary to-primary flex items-center justify-between font-semibold text-white"
       for="upload-photo"
     >
       <span
@@ -47,15 +71,34 @@
     />
     <div class="grid grid-cols-3 gap-2">
       <img
-        class="border max-h-44 h-auto w-full"
+        class="border max-h-44 h-44 w-full object-cover shadow-full"
         *ngFor="let item of preview"
         [src]="item"
         alt=""
         srcset=""
       />
     </div>
-    <div class="self-end mr-4">
-      <app-button content="POST" [disabled]="formCreate.invalid"></app-button>
+
+    <div class="self-end px-4 mt-5 w-full flex justify-between">
+      <app-button
+        content="CANCEL"
+        type="secondary"
+        (event)="close()"
+      ></app-button>
+
+      <div>
+        <span
+          *ngIf="formCreate.controls.images.hasError('maxlength')"
+          class="text-red-500 text-xs"
+        >
+          Max file is 10</span
+        >
+        <app-button
+          content="POST"
+          [disabled]="formCreate.invalid"
+          (event)="submitPost()"
+        ></app-button>
+      </div>
     </div>
   </form>
 </div>

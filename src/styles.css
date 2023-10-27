@@ -45,3 +45,25 @@ body {
 .active-router {
   color: #ceff1a;
 }
+
+.ngneat-dialog-content {
+  overflow: visible !important;
+}
+
+.ngneat-dialog-backdrop {
+  overflow: auto !important;
+}
+
+.cdk-overlay-container {
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 10000;
+}
+
+.cdk-overlay-pane {
+  position: absolute;
+  pointer-events: auto;
+  z-index: 10000;
+}

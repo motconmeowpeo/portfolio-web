@@ -1,11 +1,13 @@
 <div class="blog w-full max-w-7xl m-auto mt-20">
   <div class="grid grid-cols-3 gap-8 w-full items-center">
-    <div class="group relative h-fit w-full flex items-center">
+    <div
+      class="group relative h-fit w-full flex items-center cursor-pointer"
+      (click)="openModal()"
+    >
       <input
-        class="h-15 p-4 w-full hover:border-primary transition-all duration-300 cursor-pointer rounded-md outline-none bg-header-color border border-border-color text-white-text"
+        class="h-15 p-4 w-full group-hover:border-primary transition-all duration-300 cursor-pointer rounded-md outline-none bg-header-color border border-border-color text-white-text"
         type="text"
         placeholder="Click here to post"
-        (click)="openModal()"
       />
       <fa-icon
         class="absolute group-hover:text-primary transition-all duration-300 right-8 top-0 bottom-0 translate-y-[calc(50%-10px)] z-10 text-white"

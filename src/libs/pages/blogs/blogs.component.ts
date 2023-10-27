@@ -33,14 +33,8 @@ export class BlogsComponent implements OnInit {
   }
 
   openModal() {
-    console.log('OPEN');
     this.dialog.open(CreatePostComponent, {
-      size: 'md',
+      size: 'lg',
     });
-  }
-
-  handleCancel() {}
-  handlePost() {
-    console.log('Post');
   }
 }

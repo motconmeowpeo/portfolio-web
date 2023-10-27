@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class ButtonComponent {
   @Input() content!: string;
   @Input() className: string = 'h-14';
-  @Input() type: string = 'primary';
+  @Input() type: string = 'primary' || 'secondary';
   @Input() icon!: IconDefinition;
   @Input() disabled = false;
   @Output() event: EventEmitter<void> = new EventEmitter();
