@@ -13,7 +13,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { DialogCloseDirective, DialogRef, DialogService } from '@ngneat/dialog';
 import { PostFacade } from '@core/services/post';
-import { interval, tap, timer } from 'rxjs';
+import { catchError, interval, tap, timer } from 'rxjs';
 import { FileService } from '@core/services/file';
 import { URL_IMAGE } from '@core/constants';
 
@@ -126,6 +126,10 @@ export class CreatePostComponent implements OnInit, OnDestroy {
       .pipe(
         tap(() => {
           this.close();
+        }),
+        catchError((er) => {
+          this.close();
+          return er;
         })
       )
       .subscribe();

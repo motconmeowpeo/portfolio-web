@@ -3,8 +3,9 @@ import { Observable } from 'rxjs';
 import { HttpService } from '../http';
 import { IBaseParams } from '../../models/base.model';
 import { IPost, IPostCommand } from '../../models/post.model';
+import { environment } from 'src/environments/environment';
 
-export const API_POST = 'http://localhost:9000/api/post';
+export const API_POST = environment.apiUrl;
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
