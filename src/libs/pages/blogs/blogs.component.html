@@ -4,32 +4,48 @@
       class="group relative h-fit w-full flex items-center cursor-pointer"
       (click)="openModal()"
     >
-      <input
-        class="h-15 p-4 w-full group-hover:border-primary transition-all duration-300 cursor-pointer rounded-md outline-none bg-header-color border border-border-color text-white-text"
-        type="text"
-        placeholder="Click here to post"
-      />
+      <button
+        class="h-15 p-4 w-full group-hover:border-primary text-globaltext transition-all duration-300 cursor-pointer rounded-md outline-none bg-header-color border border-border-color"
+      >
+        Click here to post
+      </button>
       <fa-icon
         class="absolute group-hover:text-primary transition-all duration-300 right-8 top-0 bottom-0 translate-y-[calc(50%-10px)] z-10 text-white"
         [icon]="faPaperPlane"
       ></fa-icon>
     </div>
   </div>
-  <div *ngIf="posts$ | async as posts" class="mt-20">
-    <div class="grid grid-cols-3 gap-8">
-      <ng-container *ngFor="let item of posts">
-        <app-post-item [post]="item"></app-post-item>
+  <ng-container *ngIf="!isLoading; else loadingTemplate">
+    <ng-container *ngIf="posts$ | async as posts">
+      <ng-container *ngIf="posts.length; else noPost">
+        <div class="mt-20">
+          <div class="grid grid-cols-3 gap-8">
+            <ng-container *ngFor="let item of posts">
+              <app-post-item [post]="item"></app-post-item>
+            </ng-container>
+          </div>
+          <div class="mt-20">
+            <nz-pagination
+              [nzPageIndex]="1"
+              [nzTotal]="(posts$ | async)?.length"
+              [nzPageSize]="10"
+              (nzPageIndexChange)="pageIndexChange($event)"
+            ></nz-pagination>
+          </div>
+        </div>
       </ng-container>
+    </ng-container>
+    <ng-template #noPost>
+      <div class="text-lg text-white mt-20 w-full flex justify-center">
+        You have no post
+      </div>
+    </ng-template>
+  </ng-container>
+  <ng-template #loadingTemplate>
+    <div class="mt-20 w-full flex justify-center">
+      <app-loading></app-loading>
     </div>
-    <div class="mt-20">
-      <nz-pagination
-        [nzPageIndex]="1"
-        [nzTotal]="100"
-        [nzPageSize]="9"
-        (nzPageIndexChange)="pageIndexChange($event)"
-      ></nz-pagination>
-    </div>
-  </div>
+  </ng-template>
 </div>
 <div class="py-20 bg-header-color mt-20">
   <app-footer (goToSend)="gotoSendMessage()"></app-footer>

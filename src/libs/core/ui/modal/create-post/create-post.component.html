@@ -23,6 +23,7 @@
         placeholder="Title*"
         id="title"
         formControlName="title"
+        autofocus
       ></textarea>
       <span
         *ngIf="formCreate.controls.title.hasError('required')"
@@ -95,7 +96,7 @@
         >
         <app-button
           content="POST"
-          [disabled]="formCreate.invalid"
+          [disabled]="formCreate.invalid || isLoading"
           (event)="submitPost()"
         ></app-button>
       </div>

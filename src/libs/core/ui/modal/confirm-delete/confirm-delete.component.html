@@ -1,0 +1,26 @@
+<div
+  class="create-post py-4 flex flex-col h-full w-full overflow-auto bg-white"
+>
+  <div class="border-b border-primary p-4 w-full">
+    <span
+      class="text-transparent text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative"
+    >
+      Delete post
+    </span>
+  </div>
+  <div class="des self-center mt-5">
+    If you delete this post. You can't revert
+  </div>
+
+  <div class="self-end px-4 mt-5 w-full flex justify-between">
+    <app-button
+      content="CANCEL"
+      type="secondary"
+      (event)="close()"
+    ></app-button>
+
+    <div>
+      <app-button content="SUBMIT" (event)="submit()"></app-button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="menu relative" #menu (click)="openMenu($event)">
+  <!-- Trigger -->
+  <ng-content select="[menuTrigger]"></ng-content>
+
+  <!-- Content -->
+  <div
+    #dropdown
+    *ngIf="isMenuShown"
+    class="absolute z-10 animate-fade-in-0.1 select-none"
+    [style.z-index]="zIndex"
+    [class]="positionClasses"
+    [ngClass]="dropPositionClasses"
+  >
+    <ng-content select="[menuContent]"></ng-content>
+  </div>
+</div>

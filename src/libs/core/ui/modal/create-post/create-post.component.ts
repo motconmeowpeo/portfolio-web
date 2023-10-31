@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
@@ -11,7 +11,11 @@ import {
 import { ButtonComponent } from '@core/ui';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { DialogCloseDirective, DialogService } from '@ngneat/dialog';
+import { DialogCloseDirective, DialogRef, DialogService } from '@ngneat/dialog';
+import { PostFacade } from '@core/services/post';
+import { interval, tap, timer } from 'rxjs';
+import { FileService } from '@core/services/file';
+import { URL_IMAGE } from '@core/constants';
 
 export interface ICreatePostForm {
   title: FormControl<string>;
@@ -31,21 +35,31 @@ export interface ICreatePostForm {
   ],
   templateUrl: './create-post.component.html',
 })
-export class CreatePostComponent implements OnInit {
+export class CreatePostComponent implements OnInit, OnDestroy {
   readonly faImage = faImage;
   formCreate!: FormGroup<ICreatePostForm>;
   preview: string[] = [];
   sanitizedHtml!: SafeHtml;
+  isLoading = false;
 
   // Function to sanitize HTML
 
   ngOnInit(): void {
-    this.sanitizeHtml();
     this.createForm();
   }
 
-  constructor(private sanitizer: DomSanitizer, private dialog: DialogService) {}
+  constructor(
+    private sanitizer: DomSanitizer,
+    private cd: ChangeDetectorRef,
+    private dialog: DialogService,
+    private dialogRef: DialogRef,
+    private postFacade: PostFacade,
+    private fileService: FileService
+  ) {}
 
+  ngOnDestroy(): void {
+    this.cd.detectChanges();
+  }
   private createForm() {
     const file: File[] = []; // Giá trị ban đầu cho form control "preview"
     this.formCreate = new FormGroup({
@@ -67,7 +81,6 @@ export class CreatePostComponent implements OnInit {
         validators: [Validators.maxLength(10)],
       }),
     });
-    this.formCreate.valueChanges.subscribe((data) => {});
   }
 
   onInputFile(event: Event) {
@@ -88,16 +101,33 @@ export class CreatePostComponent implements OnInit {
   }
 
   submitPost() {
-    console.log(this.formCreate.value);
+    this.isLoading = true;
+    this.fileService.upload(this.formCreate.controls.images.value);
+
+    timer(3000)
+      .pipe(
+        tap(() => {
+          this.createPost();
+        })
+      )
+      .subscribe();
   }
 
   close() {
-    this.dialog.closeAll();
+    this.dialogRef.close();
   }
 
-  sanitizeHtml() {
-    this.sanitizedHtml = this.sanitizer.bypassSecurityTrustHtml(
-      "<script>alert('Hello')</script>"
+  createPost() {
+    const images = this.formCreate.controls.images.value.map(
+      (file) => file.name
     );
+    this.postFacade
+      .create({ ...this.formCreate.value, images })
+      .pipe(
+        tap(() => {
+          this.close();
+        })
+      )
+      .subscribe();
   }
 }

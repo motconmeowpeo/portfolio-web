@@ -2,6 +2,7 @@ import { IUser } from './user.model';
 
 export interface IPost {
   id: string;
+  _id: string;
   title: string;
   description: string;
   images?: string[];
@@ -12,6 +13,5 @@ export interface IPost {
 export interface IPostCommand {
   title: string;
   description: string;
-  images: File[];
-  createAt: string;
+  images: string[];
 }

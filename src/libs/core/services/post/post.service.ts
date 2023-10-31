@@ -4,7 +4,7 @@ import { HttpService } from '../http';
 import { IBaseParams } from '../../models/base.model';
 import { IPost, IPostCommand } from '../../models/post.model';
 
-export const API_POST = 'http://localhost:3001/api/v1/post';
+export const API_POST = 'http://localhost:9000/api/post';
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
@@ -24,6 +24,6 @@ export class PostService {
   }
 
   delete(id: string) {
-    return this.http.delete<IPost>(`${API_POST}/${id}`);
+    return this.http.post<IPost>(`${API_POST}/delete`, { id });
   }
 }

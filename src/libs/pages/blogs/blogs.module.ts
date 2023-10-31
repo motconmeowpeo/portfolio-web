@@ -8,6 +8,7 @@ import { NzImageModule } from 'ng-zorro-antd/image';
 import { ButtonComponent } from '@core/ui';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { LoadingComponent } from '@core/components/loading';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
     RouterModule,
     ButtonComponent,
     FontAwesomeModule,
+    LoadingComponent,
   ],
   declarations: [BlogsComponent],
 })

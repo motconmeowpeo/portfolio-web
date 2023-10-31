@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { URL_IMAGE } from '@core/constants';
 import { PostFacade } from '@core/services/post';
 import { CreatePostComponent } from '@core/ui/modal';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { DialogService } from '@ngneat/dialog';
+import { catchError, delay, tap } from 'rxjs';
 
 @Component({
   selector: 'app-blogs',
@@ -13,7 +15,8 @@ import { DialogService } from '@ngneat/dialog';
 export class BlogsComponent implements OnInit {
   readonly faPaperPlane = faPaperPlane;
 
-  posts$ = this.postFacade.getAll();
+  isLoading = false;
+  posts$ = this.postFacade.posts$;
 
   constructor(
     private routes: Router,
@@ -22,15 +25,25 @@ export class BlogsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.postFacade.getAll().subscribe();
+    this.isLoading = true;
+    this.postFacade
+      .getAll()
+      .pipe(
+        tap(() => {
+          this.isLoading = false;
+        }),
+        catchError((err) => {
+          this.isLoading = false;
+          return err;
+        })
+      )
+      .subscribe();
   }
   gotoSendMessage() {
     this.routes.navigateByUrl('/home?goto=true');
   }
 
-  pageIndexChange(index: number) {
-    console.log(index);
-  }
+  pageIndexChange(index: number) {}
 
   openModal() {
     this.dialog.open(CreatePostComponent, {
