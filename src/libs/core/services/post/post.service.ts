@@ -3,9 +3,8 @@ import { Observable } from 'rxjs';
 import { HttpService } from '../http';
 import { IBaseParams } from '../../models/base.model';
 import { IPost, IPostCommand } from '../../models/post.model';
-import { environment } from 'src/environments/environment';
 
-export const API_POST = environment.apiUrl;
+export const API_POST = 'https://portfolio-api-ten-vert.vercel.app/api/post';
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
