@@ -13,9 +13,10 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { DialogCloseDirective, DialogRef, DialogService } from '@ngneat/dialog';
 import { PostFacade } from '@core/services/post';
-import { catchError, interval, tap, timer } from 'rxjs';
+import { Subject, catchError, interval, tap, timer } from 'rxjs';
 import { FileService } from '@core/services/file';
 import { URL_IMAGE } from '@core/constants';
+import { AuthFacade } from '@core/services/auth';
 
 export interface ICreatePostForm {
   title: FormControl<string>;
@@ -41,6 +42,8 @@ export class CreatePostComponent implements OnInit, OnDestroy {
   preview: string[] = [];
   sanitizedHtml!: SafeHtml;
   isLoading = false;
+  user$ = this.authFacade.user$;
+  unsubscribe$ = new Subject<void>();
 
   // Function to sanitize HTML
 
@@ -54,11 +57,14 @@ export class CreatePostComponent implements OnInit, OnDestroy {
     private dialog: DialogService,
     private dialogRef: DialogRef,
     private postFacade: PostFacade,
+    private authFacade: AuthFacade,
     private fileService: FileService
   ) {}
 
   ngOnDestroy(): void {
     this.cd.detectChanges();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
   private createForm() {
     const file: File[] = []; // Giá trị ban đầu cho form control "preview"
@@ -102,27 +108,31 @@ export class CreatePostComponent implements OnInit, OnDestroy {
 
   submitPost() {
     this.isLoading = true;
-    this.fileService.upload(this.formCreate.controls.images.value);
 
-    timer(3000)
-      .pipe(
-        tap(() => {
-          this.createPost();
-        })
-      )
-      .subscribe();
+    this.fileService.upload(this.formCreate.controls.images.value);
+    this.user$.subscribe((user) => {
+      if (user) {
+        timer(3000)
+          .pipe(
+            tap(() => {
+              this.createPost(user.username);
+            })
+          )
+          .subscribe();
+      }
+    });
   }
 
   close() {
     this.dialogRef.close();
   }
 
-  createPost() {
+  createPost(createBy: string) {
     const images = this.formCreate.controls.images.value.map(
       (file) => file.name
     );
     this.postFacade
-      .create({ ...this.formCreate.value, images })
+      .create({ ...this.formCreate.value, images, createBy })
       .pipe(
         tap(() => {
           this.close();

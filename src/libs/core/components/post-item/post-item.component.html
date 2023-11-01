@@ -1,4 +1,4 @@
-<div class="post relative group">
+<div class="post relative group border border-border-color">
   <section
     class="flex relative group cursor-pointer"
     [routerLink]="['/post/' + post.id]"
@@ -6,7 +6,7 @@
     <div class="image h-96 w-full">
       <img
         *ngIf="post.images && post.images?.length"
-        [src]="URL_IMAGE +post.images[0]"
+        [src]="URL_IMAGE + post.images[0]"
         alt=""
         class="h-full w-full overflow-hidden object-cover"
       />
@@ -37,7 +37,10 @@
         <div class="text-white text-xs">{{ formatDate(post.createAt) }}</div>
       </div>
     </div>
-    <div class="absolute hidden group-hover:block top-2 right-2">
+    <div
+      class="absolute hidden group-hover:block top-2 right-2"
+      *ngIf="user$ | async"
+    >
       <app-menu position="right">
         <!-- Trigger -->
         <i

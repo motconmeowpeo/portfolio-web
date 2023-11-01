@@ -1,0 +1,5 @@
+<form [formGroup]="formLogin" class="flex flex-col">
+  <input type="text" formControlName="email" />
+  <input type="text" formControlName="password" class="mt-5" />
+  <app-button (event)="submit()" content="LOGIN"></app-button>
+</form>

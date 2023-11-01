@@ -14,4 +14,5 @@ export interface IPostCommand {
   title: string;
   description: string;
   images: string[];
+  createBy: string;
 }

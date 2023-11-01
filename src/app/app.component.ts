@@ -17,13 +17,18 @@ export class AppComponent implements OnInit {
   @ViewChild('cursor') cursorRef!: ElementRef<HTMLDivElement>;
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
-    this.cursorRef.nativeElement.style.left = `${event.pageX}px`;
-    this.cursorRef.nativeElement.style.top = `${event.pageY}px`;
-    this.cursorRef.nativeElement.style.display = `block`;
+    if (this.cursorRef) {
+      this.cursorRef.nativeElement.style.left = `${event.pageX}px`;
+      this.cursorRef.nativeElement.style.top = `${event.pageY}px`;
+      this.cursorRef.nativeElement.style.display = `block`;
+    }
   }
   @HostListener('document:scroll', ['$event'])
   onScroll(event: MouseEvent) {
-    this.cursorRef.nativeElement.style.left = `${event.pageX}px`;
-    this.cursorRef.nativeElement.style.top = `${event.pageY}px`;
+    if (this.cursorRef) {
+      this.cursorRef.nativeElement.style.left = `${event.pageX}px`;
+
+      this.cursorRef.nativeElement.style.top = `${event.pageY}px`;
+    }
   }
 }

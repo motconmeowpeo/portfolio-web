@@ -20,13 +20,6 @@ export class FooterComponent {
   readonly faMessage = faMessage;
   @Output() goToSend: EventEmitter<void> = new EventEmitter<void>();
 
-  scrollTo() {
-    window.scrollTo({
-      top: 2000,
-      left: 0,
-      behavior: 'smooth',
-    });
-  }
   gotoSendMessage() {
     this.goToSend.emit();
   }

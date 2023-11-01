@@ -6,6 +6,7 @@ import { CreatePostComponent } from '@core/ui/modal';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { DialogService } from '@ngneat/dialog';
 import { catchError, delay, tap } from 'rxjs';
+import { AuthFacade } from '../../core/services/auth/auth.facade';
 
 @Component({
   selector: 'app-blogs',
@@ -17,10 +18,12 @@ export class BlogsComponent implements OnInit {
 
   isLoading = false;
   posts$ = this.postFacade.posts$;
+  user$ = this.authFacade.user$;
 
   constructor(
     private routes: Router,
     private postFacade: PostFacade,
+    private authFacade: AuthFacade,
     private dialog: DialogService
   ) {}
 

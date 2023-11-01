@@ -1,5 +1,5 @@
 <div class="blog w-full max-w-7xl m-auto mt-20">
-  <div class="grid grid-cols-3 gap-8 w-full items-center">
+  <div class="grid grid-cols-3 gap-8 w-full items-center" *ngIf="user$ | async">
     <div
       class="group relative h-fit w-full flex items-center cursor-pointer"
       (click)="openModal()"
@@ -23,14 +23,6 @@
             <ng-container *ngFor="let item of posts">
               <app-post-item [post]="item"></app-post-item>
             </ng-container>
-          </div>
-          <div class="mt-20">
-            <nz-pagination
-              [nzPageIndex]="1"
-              [nzTotal]="(posts$ | async)?.length"
-              [nzPageSize]="10"
-              (nzPageIndexChange)="pageIndexChange($event)"
-            ></nz-pagination>
           </div>
         </div>
       </ng-container>

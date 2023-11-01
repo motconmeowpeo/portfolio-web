@@ -11,14 +11,15 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
+import { JwtModule } from '@auth0/angular-jwt';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBLmyT1VQYsb-Wo8GV_dUp1evDd_cvXy7M",
-  authDomain: "portfolio-403709.firebaseapp.com",
-  projectId: "portfolio-403709",
-  storageBucket: "portfolio-403709.appspot.com",
-  messagingSenderId: "778215680092",
-  appId: "1:778215680092:web:9aa50668733282508bde99"
+  apiKey: 'AIzaSyBLmyT1VQYsb-Wo8GV_dUp1evDd_cvXy7M',
+  authDomain: 'portfolio-403709.firebaseapp.com',
+  projectId: 'portfolio-403709',
+  storageBucket: 'portfolio-403709.appspot.com',
+  messagingSenderId: '778215680092',
+  appId: '1:778215680092:web:9aa50668733282508bde99',
 };
 
 @NgModule({
@@ -33,6 +34,11 @@ const firebaseConfig = {
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => '',
+      },
+    }),
   ],
   providers: [HttpService],
   bootstrap: [AppComponent],

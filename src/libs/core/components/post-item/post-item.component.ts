@@ -13,6 +13,7 @@ import { ConfirmDeleteComponent } from '../../ui/modal/confirm-delete/confirm-de
 import { ModalCloseStatus } from '@core/enums';
 import { MenuComponent } from '../../ui/menu/menu.component';
 import { URL_IMAGE } from '@core/constants';
+import { AuthFacade } from '@core/services/auth';
 
 @Component({
   selector: 'app-post-item',
@@ -25,14 +26,15 @@ export class PostItemComponent implements OnInit {
   readonly faTrash = faTrash;
   readonly faPen = faPen;
   readonly URL_IMAGE = URL_IMAGE;
-
+  user$ = this.authFacade.user$;
   safeHtml!: SafeHtml;
   @Input() post!: IPost;
 
   constructor(
     private sanitizer: DomSanitizer,
     private postFacade: PostFacade,
-    private dialog: DialogService
+    private dialog: DialogService,
+    private authFacade: AuthFacade
   ) {}
   formatDate(date: string | Date) {
     return format(new Date(date), 'HH:mm dd-MM-yyyy');

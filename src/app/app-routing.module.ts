@@ -20,10 +20,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('@pages/post-detail').then((page) => page.PostDetailModule),
   },
+  {
+    path: 'login',
+    loadChildren: () => import('@pages/login').then((page) => page.LoginModule),
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
