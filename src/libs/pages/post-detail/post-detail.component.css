@@ -6,3 +6,20 @@
   /* top: 100% !important; */
   background-image: linear-gradient(to right, #ceff1a, #dd1e4b) !important;
 }
+
+[nz-carousel-content] {
+  text-align: center;
+  height: 400px;
+  line-height: 160px;
+  overflow: hidden;
+}
+
+::ng-deep .ant-carousel .slick-dots li button {
+  height: 8px !important;
+}
+
+::ng-deep .slick-dots li button:before {
+  top: -4px;
+  left: 1px;
+  display: none;
+}

@@ -21,8 +21,17 @@ const routes: Routes = [
       import('@pages/post-detail').then((page) => page.PostDetailModule),
   },
   {
-    path: 'login',
+    path: 'admin',
     loadChildren: () => import('@pages/login').then((page) => page.LoginModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found',
+    pathMatch: 'prefix',
+  },
+  {
+    path: 'not-found',
+    loadChildren: () => import('@pages/not-found').then((page) => page.NotFoundModule),
   },
 ];
 
@@ -30,4 +39,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

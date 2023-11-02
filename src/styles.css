@@ -2,6 +2,7 @@
 @import "../node_modules/aos/dist/aos.css";
 @import "../node_modules/ng-zorro-antd/pagination/style/index.min.css";
 @import "../node_modules/ng-zorro-antd/image/style/index.min.css";
+@import "../node_modules/ng-zorro-antd/carousel/style/index.min.css";
 
 @tailwind base;
 @tailwind components;

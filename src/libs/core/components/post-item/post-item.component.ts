@@ -14,11 +14,13 @@ import { ModalCloseStatus } from '@core/enums';
 import { MenuComponent } from '../../ui/menu/menu.component';
 import { URL_IMAGE } from '@core/constants';
 import { AuthFacade } from '@core/services/auth';
+import { LoadingSmallComponent } from '../loading-small/loading-small.component';
+import { catchError, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-post-item',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, RouterModule, MenuComponent],
+  imports: [CommonModule, FontAwesomeModule, RouterModule, MenuComponent, LoadingSmallComponent],
   templateUrl: './post-item.component.html',
 })
 export class PostItemComponent implements OnInit {
@@ -26,6 +28,7 @@ export class PostItemComponent implements OnInit {
   readonly faTrash = faTrash;
   readonly faPen = faPen;
   readonly URL_IMAGE = URL_IMAGE;
+  isLoading = false;
   user$ = this.authFacade.user$;
   safeHtml!: SafeHtml;
   @Input() post!: IPost;
@@ -35,7 +38,7 @@ export class PostItemComponent implements OnInit {
     private postFacade: PostFacade,
     private dialog: DialogService,
     private authFacade: AuthFacade
-  ) {}
+  ) { }
   formatDate(date: string | Date) {
     return format(new Date(date), 'HH:mm dd-MM-yyyy');
   }
@@ -57,7 +60,15 @@ export class PostItemComponent implements OnInit {
       })
       .afterClosed$.subscribe((result) => {
         if (result === ModalCloseStatus.COMPLETE) {
-          this.postFacade.delete(this.post._id).subscribe();
+          this.isLoading = true;
+          this.postFacade.delete(this.post._id).pipe(
+            tap(() => {
+              this.isLoading = false;
+            }), catchError(er => {
+              this.isLoading = false;
+              return of(er)
+            })
+          ).subscribe();
         }
       });
   }

@@ -1,0 +1,40 @@
+.loader {
+  width:30px;
+  height: 30px;
+  display: inline-block;
+  position: relative;
+}
+.loader::after,
+.loader::before {
+  content: "";
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #dd1e4b;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: rotationBreak 3s ease-in-out infinite alternate;
+}
+.loader::after {
+  border-color: #ceff1a;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes rotationBreak {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

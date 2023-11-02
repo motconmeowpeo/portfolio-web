@@ -13,7 +13,7 @@ import { AuthFacade } from '../../core/services/auth/auth.facade';
   providedIn: 'root',
 })
 export class LoginGuard implements CanActivate {
-  constructor(private authFacade: AuthFacade, private router: Router) {}
+  constructor(private authFacade: AuthFacade, private router: Router) { }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -27,7 +27,7 @@ export class LoginGuard implements CanActivate {
     return this.authFacade.isAuthenticated().pipe(
       map((isAuthenticated) => {
         if (isAuthenticated) {
-          this.router.navigate(['home']);
+          this.router.navigate(['not-found']);
           return false;
         }
         return true;

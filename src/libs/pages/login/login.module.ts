@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '@core/ui';
 import { LoginGuard } from './login.guard';
+import { LoadingSmallComponent } from '@core/components/loading-small';
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     ButtonComponent,
+    LoadingSmallComponent
   ],
   declarations: [LoginComponent],
 })
-export class LoginModule {}
+export class LoginModule { }

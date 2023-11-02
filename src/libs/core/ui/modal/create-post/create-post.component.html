@@ -1,104 +1,58 @@
-<div
-  class="create-post py-4 flex flex-col h-full w-full overflow-auto bg-white"
->
+<div class="create-post py-4 flex flex-col h-full w-full overflow-auto bg-white">
   <div class="border-b border-primary p-4 w-full">
     <span
-      class="text-transparent text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative"
-    >
+      class="text-transparent text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative">
       Create post
     </span>
   </div>
 
   <form [formGroup]="formCreate" class="flex flex-col">
     <div class="mt-10 mx-4 flex flex-col">
-      <textarea
-        class="h-15 p-4 w-full rounded-md"
-        [ngClass]="
+      <textarea class="h-15 p-4 w-full rounded-md" [ngClass]="
           formCreate.controls.title.hasError('required') ||
           formCreate.controls.title.hasError('pattern')
             ? 'border-primary border outline-primary'
             : 'border-primary-color border outline-primary-color'
-        "
-        type="text"
-        placeholder="Title*"
-        id="title"
-        formControlName="title"
-        autofocus
-      ></textarea>
-      <span
-        *ngIf="formCreate.controls.title.hasError('required')"
-        class="text-red-500 text-xs"
-      >
-        This field is required</span
-      >
-      <span
-        *ngIf="formCreate.controls.title.hasError('pattern')"
-        class="text-red-500 text-xs"
-      >
-        Title should be text and number</span
-      >
+        " type="text" placeholder="Title*" id="title" formControlName="title" autofocus></textarea>
+      <span *ngIf="formCreate.controls.title.hasError('required')" class="text-red-500 text-xs">
+        This field is required</span>
+      <span *ngIf="formCreate.controls.title.hasError('pattern')" class="text-red-500 text-xs">
+        Title should be text and number</span>
     </div>
     <div class="mt-5 p-4 pt-2">
       <ckeditor [formControl]="formCreate.controls.description"></ckeditor>
-      <span
-        *ngIf="formCreate.controls.description.hasError('required')"
-        class="text-red-500 text-xs"
-      >
-        This field is required</span
-      >
+      <span *ngIf="formCreate.controls.description.hasError('required')" class="text-red-500 text-xs">
+        This field is required</span>
     </div>
     <label
       class="group w-fit cursor-pointer p-4 ml-4 h-14 mt-5 bg-gradient-to-r from-secondary to-primary flex items-center justify-between font-semibold text-white"
-      for="upload-photo"
-    >
-      <span
-        class="ml-3 text-black group-hover:text-white duration-300 transition-all"
-        >UPLOAD</span
-      >
-      <fa-icon
-        [icon]="faImage"
-        class="text-black text-2xl ml-4 rotate-12 group-hover:text-white duration-300 transition-all"
-      ></fa-icon>
+      for="upload-photo">
+      <span class="ml-3 text-black group-hover:text-white duration-300 transition-all">UPLOAD</span>
+      <fa-icon [icon]="faImage"
+        class="text-black text-2xl ml-4 rotate-12 group-hover:text-white duration-300 transition-all"></fa-icon>
     </label>
 
-    <input
-      class="opacity-0"
-      type="file"
-      name="photo"
-      id="upload-photo"
-      multiple
-      accept="image/*"
-      (input)="onInputFile($event)"
-    />
+    <input class="opacity-0" type="file" name="photo" id="upload-photo" multiple accept="image/*"
+      (input)="onInputFile($event)" />
     <div class="grid grid-cols-3 gap-2">
-      <img
-        class="border max-h-44 h-44 w-full object-cover shadow-full"
-        *ngFor="let item of preview"
-        [src]="item"
-        alt=""
-        srcset=""
-      />
+      <img class="border max-h-44 h-44 w-full object-cover shadow-full" *ngFor="let item of preview" [src]="item" alt=""
+        srcset="" />
     </div>
 
     <div class="self-end px-4 mt-5 w-full flex justify-between">
-      <app-button
-        content="CANCEL"
-        type="secondary"
-        (event)="close()"
-      ></app-button>
+      <app-button content="CANCEL" type="secondary" (event)="close()"></app-button>
 
       <div>
-        <span
-          *ngIf="formCreate.controls.images.hasError('maxlength')"
-          class="text-red-500 text-xs"
-        >
-          Max file is 10</span
-        >
-        <app-button
-          content="POST"
-          [disabled]="formCreate.invalid || isLoading"
-          (event)="submitPost()"
-        ></app-button>
+        <span *ngIf="formCreate.controls.images.hasError('maxlength')" class="text-red-500 text-xs">
+          Max file is 10</span>
+        <ng-container *ngIf="isLoading; else elseTemplate">
+          <div class="mr-10 flex items-center justify-center h-full">
+            <app-loading-small></app-loading-small>
+          </div>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <app-button content="POST" [disabled]="formCreate.invalid" (event)="submitPost()"></app-button>
+        </ng-template>
       </div>
     </div>
   </form>

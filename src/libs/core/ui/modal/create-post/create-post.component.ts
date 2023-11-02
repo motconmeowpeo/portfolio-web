@@ -13,10 +13,11 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { DialogCloseDirective, DialogRef, DialogService } from '@ngneat/dialog';
 import { PostFacade } from '@core/services/post';
-import { Subject, catchError, interval, tap, timer } from 'rxjs';
+import { Subject, catchError, delay, interval, tap, timer } from 'rxjs';
 import { FileService } from '@core/services/file';
 import { URL_IMAGE } from '@core/constants';
 import { AuthFacade } from '@core/services/auth';
+import { LoadingSmallComponent } from '@core/components/loading-small';
 
 export interface ICreatePostForm {
   title: FormControl<string>;
@@ -33,6 +34,7 @@ export interface ICreatePostForm {
     ReactiveFormsModule,
     ButtonComponent,
     CKEditorModule,
+    LoadingSmallComponent
   ],
   templateUrl: './create-post.component.html',
 })
@@ -59,7 +61,7 @@ export class CreatePostComponent implements OnInit, OnDestroy {
     private postFacade: PostFacade,
     private authFacade: AuthFacade,
     private fileService: FileService
-  ) {}
+  ) { }
 
   ngOnDestroy(): void {
     this.cd.detectChanges();
