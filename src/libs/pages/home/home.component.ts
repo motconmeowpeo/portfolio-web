@@ -9,22 +9,30 @@ import {
   faBriefcase,
   faMugHot,
   faPaperPlane,
-  faSchool,
 } from '@fortawesome/free-solid-svg-icons';
-import { fromEvent } from 'rxjs';
 import * as AOS from 'aos';
-import {
-  faAngular,
-  faDocker,
-  faReact,
-} from '@fortawesome/free-brands-svg-icons';
+
 import { ActivatedRoute } from '@angular/router';
 import { faHospital } from '@fortawesome/free-regular-svg-icons';
+import { CommonModule } from '@angular/common';
+import { FooterComponent, HeaderComponent, SkillItemComponent } from '@core/components';
+import { ButtonComponent, HorizontalComponent } from '@core/ui';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    ButtonComponent,
+    FontAwesomeModule,
+    HorizontalComponent,
+    SkillItemComponent,
+    FooterComponent,
+  ],
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   readonly faMugHot = faMugHot;
@@ -74,7 +82,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     },
   ];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     AOS.init({

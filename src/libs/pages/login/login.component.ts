@@ -1,7 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
+import { LoadingSmallComponent } from '@core/components/loading-small';
 import { AuthFacade } from '@core/services/auth';
+import { ButtonComponent } from '@core/ui';
 import { catchError, of } from 'rxjs';
 
 export interface ILoginForm {
@@ -12,10 +15,18 @@ export interface ILoginForm {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ButtonComponent,
+    LoadingSmallComponent
+  ],
+
 })
 export class LoginComponent implements OnInit {
   formLogin!: FormGroup<ILoginForm>;
-  isLoading = false
+  isLoading = false;
   constructor(private authFacade: AuthFacade, private router: Router) { }
 
   ngOnInit() {

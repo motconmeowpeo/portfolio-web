@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BlogsComponent } from '../libs/pages/blogs/blogs.component';
+import { LoginGuard } from '@pages/login';
+import { PostDetailComponent } from '../libs/pages/post-detail/post-detail.component';
 
 const routes: Routes = [
   {
@@ -9,20 +12,21 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('@pages/home').then((page) => page.HomeModule),
+    loadComponent: () => import('@pages/home').then((page) => page.HomeComponent),
   },
   {
     path: 'blog',
-    loadChildren: () => import('@pages/blogs').then((page) => page.BlogsModule),
+    loadComponent: () => import('@pages/blogs').then((page) => page.BlogsComponent),
   },
   {
     path: 'post/:id',
-    loadChildren: () =>
-      import('@pages/post-detail').then((page) => page.PostDetailModule),
+    loadComponent: () =>
+      import('@pages/post-detail').then((page) => page.PostDetailComponent),
   },
   {
     path: 'admin',
-    loadChildren: () => import('@pages/login').then((page) => page.LoginModule),
+    loadComponent: () => import('@pages/login').then((page) => page.LoginComponent),
+    canActivate: [LoginGuard]
   },
   {
     path: '**',
@@ -31,7 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'not-found',
-    loadChildren: () => import('@pages/not-found').then((page) => page.NotFoundModule),
+    loadComponent: () => import('@pages/not-found').then((page) => page.NotFoundComponent),
   },
 ];
 

@@ -14,9 +14,9 @@
     <div
       class="intro absolute top-0 left-0 right-0 bottom-0 max-w-7xl m-auto w-full z-10 translate-y-[30%]"
     >
-      <div class="max-w-md">
+      <div class="max-w-md p-2">
         <h1
-          class="neon-text text-transparent text-7xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text"
+          class="neon-text text-transparent sm:text-7xl text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text"
         >
           Hello Guys! I'm Nika.
         </h1>
@@ -54,7 +54,7 @@
 
       <!-- My Skill -->
       <div
-        class="parent z-0 grid grid-cols-3 gap-4 mt-5 relative pb-4 pr-4 pt-1 pl-1"
+        class="parent z-0 grid sm:grid-cols-3 grid-cols-2 gap-4 mt-5 relative pb-4 pr-4 pt-1 pl-1"
       >
         <div class="col-span-1 m-4" *ngFor="let item of SKILLS">
           <app-skill-item
@@ -86,7 +86,7 @@
           commitment.</span
         >
       </div>
-      <div class="flex flex-col mt-10 self-end w-1/2">
+      <div class="sm:flex hidden flex-col mt-10 self-end w-1/2">
         <div class="flex h-20">
           <span>
             <svg

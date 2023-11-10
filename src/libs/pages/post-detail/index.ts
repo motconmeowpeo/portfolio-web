@@ -1,1 +1,1 @@
-export * from './post-detail.module';
+export * from './post-detail.component';
