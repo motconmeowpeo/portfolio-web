@@ -8,7 +8,7 @@ import { tap } from 'rxjs';
 import { format } from 'date-fns';
 import { MenuComponent } from '@core/ui';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsis, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-contact',
@@ -17,7 +17,9 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './contact.component.html',
 })
 export class ContactComponent implements OnInit {
-  readonly faPen = faPen
+  readonly faPen = faPen;
+  readonly faEllipsis = faEllipsis;
+  readonly faTrash = faTrash;
   isLoading = false;
   contacts$ = this.contactFacade.contacts$;
   constructor(private contactFacade: ContactFacade, private router: Router) { }
@@ -34,7 +36,12 @@ export class ContactComponent implements OnInit {
 
   formatDate(date: string | Date) {
     if (!!date)
-      return format(new Date(date), 'HH:mm dd-MM-yyyy');
+      return format(new Date(date), 'dd-MM-yyyy');
     return ''
   }
+
+  resolveContact(id: string) {
+    this.contactFacade.update(id).subscribe();
+  }
+  deleteContact(id: string) { this.contactFacade.delete(id).subscribe(); }
 }

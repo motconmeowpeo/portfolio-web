@@ -5,8 +5,9 @@ import {
     setActiveId,
     addEntities,
     deleteEntities,
+    updateEntities,
 } from '@ngneat/elf-entities';
-import { filter, tap } from 'rxjs';
+import { Observable, filter, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { store } from './contact.store';
 import { ContactService } from './contact.service';
@@ -44,5 +45,15 @@ export class ContactFacade {
         return this.contactService
             .delete(id)
             .pipe(tap((post) => store.update(deleteEntities(id))));
+    }
+
+    update(id: string): Observable<IContact> {
+        return this.contactService.update(id).pipe(
+            tap((post) => {
+                const contactMappingId = { ...post, id: post._id };
+                store.update(updateEntities(contactMappingId._id, contactMappingId));
+                store.update(setActiveId(contactMappingId._id));
+            })
+        );
     }
 }

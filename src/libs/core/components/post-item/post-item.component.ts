@@ -6,7 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
 import { format } from 'date-fns';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faTrash, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import { PostFacade } from '@core/services/post';
 import { DialogService } from '@ngneat/dialog';
 import { ConfirmDeleteComponent } from '../../ui/modal/confirm-delete/confirm-delete.component';
@@ -27,6 +27,7 @@ export class PostItemComponent implements OnInit {
   readonly faUser = faUser;
   readonly faTrash = faTrash;
   readonly faPen = faPen;
+  readonly faEllipsis = faEllipsis;
   readonly URL_IMAGE = URL_IMAGE;
   isLoading = false;
   user$ = this.authFacade.user$;

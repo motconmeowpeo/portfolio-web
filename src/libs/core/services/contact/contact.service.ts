@@ -22,10 +22,17 @@ export class ContactService {
     }
 
     create(payload: Partial<IContactCommand>): Observable<IContact> {
+
+        return this.http.post<IContact>(`${API_CONTACT}`, payload);
+    }
+
+    update(id: string): Observable<IContact> {
         return this.authFacade.accessToken$.pipe(
             switchMap((token) => {
-
-                return this.http.post<IContact>(`${API_CONTACT}`, payload);
+                const headers = new HttpHeaders({
+                    Authorization: token!,
+                });
+                return this.http.put<IContact>(`${API_CONTACT}/${id}`, {}, { headers });
             })
         );
     }
@@ -33,7 +40,10 @@ export class ContactService {
     delete(id: string) {
         return this.authFacade.accessToken$.pipe(
             switchMap((token) => {
-                return this.http.post<IContact>(`${API_CONTACT}/delete`, { id });
+                const headers = new HttpHeaders({
+                    Authorization: token!,
+                });
+                return this.http.post<IContact>(`${API_CONTACT}/delete`, { id }, { headers });
             })
         );
     }
