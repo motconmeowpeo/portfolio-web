@@ -1,4 +1,4 @@
-<div class="relative">
+<div class="relative sm:p-0 p-4">
   <div class="relative h-banner w-full">
     <video
       class="object-cover w-full h-full"
@@ -16,11 +16,12 @@
     >
       <div class="max-w-md p-2">
         <h1
-          class="neon-text text-transparent sm:text-7xl text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text"
+          class="neon-text text-transparent sm:text-7xl text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text"
         >
           Hello Guys! I'm Nika.
         </h1>
-        <span class="text-white-text mt-5 text-lg inline-block"
+        <span
+          class="text-white-text mt-5 text-base md:text-lg sm:text-base inline-block"
           >I am an enthusiast of technology and develop. My work is related to
           digital solutions that can help you achieve better results.</span
         >
@@ -40,21 +41,21 @@
       <!-- SKILL -->
       <div class="flex flex-col">
         <span
-          class="text-transparent text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5"
+          class="text-transparent text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5"
         >
           <span
             class="w-1/2 h-1 bg-gradient-to-r from-secondary to-primary absolute z-10 top-0"
           ></span>
           My Skills
         </span>
-        <span class="text-white-text text-lg"
+        <span class="text-white-text text-base sm:text-lg"
           >Focused on results i seek to raise the level of myself.</span
         >
       </div>
 
       <!-- My Skill -->
       <div
-        class="parent z-0 grid sm:grid-cols-3 grid-cols-2 gap-4 mt-5 relative pb-4 pr-4 pt-1 pl-1"
+        class="parent z-0 grid sm:grid-cols-3 grid-cols-2 sm:gap-4 gap-1 mt-5 relative pb-4 pr-4 pt-1 pl-1"
       >
         <div class="col-span-1 m-4" *ngFor="let item of SKILLS">
           <app-skill-item
@@ -73,14 +74,14 @@
       <!-- SEND -->
       <div class="flex flex-col self-end w-1/2">
         <span
-          class="text-transparent text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5"
+          class="text-transparent text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5"
         >
           <span
             class="send-message w-full h-1 bg-gradient-to-r from-secondary to-primary absolute z-10 top-0"
           ></span>
           Experience And Education
         </span>
-        <span class="text-white-text text-lg"
+        <span class="text-white-text sm:text-lg text-base"
           >I see all types of projects as if they were mine. This brings me
           closer to our clients' projects bringing much more confidence and
           commitment.</span
@@ -88,7 +89,7 @@
       </div>
       <div class="sm:flex hidden flex-col mt-10 self-end w-1/2">
         <div class="flex h-20">
-          <span>
+          <span class="sm:inline hidden">
             <svg
               width="80"
               height="80"
@@ -112,7 +113,7 @@
           </div>
         </div>
         <div class="flex mt-5 h-20">
-          <span
+          <span class="sm:inline hidden"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
@@ -139,73 +140,150 @@
 
     <div #message class="mt-20 w-full h-fit flex flex-col">
       <app-horizontal class="" [selfRight]="true"></app-horizontal>
-      <form class="mt-20 w-full max-w-7xl m-auto flex flex-col" [formGroup]="form">
+      <form
+        class="mt-20 w-full max-w-7xl m-auto flex flex-col"
+        [formGroup]="form"
+      >
         <!-- SEND -->
         <div class="flex flex-col self-start w-1/2">
           <span
-            class="text-transparent text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5"
+            class="text-transparent text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5"
           >
             <span
               class="send-message w-full h-1 bg-gradient-to-r from-secondary to-primary absolute z-10 top-0"
             ></span>
             Let's send message
           </span>
-          <span class="text-white-text text-lg"
+          <span class="text-white-text text-base sm:text-lg"
             >Don't wait until tomorrow. Let's send message to me</span
           >
         </div>
-        <div class="flex flex-col w-1/2 self-start">
+        <div class="flex flex-col sm:w-1/2 w-full self-start">
           <input
             class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
             type="text"
             placeholder="Your name"
             formControlName="name"
           />
-          <span *ngIf="form.controls.name.hasError('required') && form.controls.name.touched" class="text-red-500 text-xs">
-            This field is required</span>
-            <span *ngIf="form.controls.email.hasError('pattern') && form.controls.name.touched" class="text-red-500 text-xs">
-              Name should be text and number</span>
+          <span
+            *ngIf="
+              form.controls.name.hasError('required') &&
+              form.controls.name.touched
+            "
+            class="text-red-500 text-xs"
+          >
+            This field is required</span
+          >
+          <span
+            *ngIf="
+              form.controls.name.hasError('pattern') &&
+              form.controls.name.touched
+            "
+            class="text-red-500 text-xs"
+          >
+            Name should be text and number</span
+          >
+          <span
+            *ngIf="
+              form.controls.name.hasError('maxlength') &&
+              form.controls.name.touched
+            "
+            class="text-red-500 text-xs"
+          >
+            Name should be less than 20 letter</span
+          >
           <input
             class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
             type="text"
             placeholder="Your email"
             formControlName="email"
           />
-          <span *ngIf="form.controls.email.hasError('required') && form.controls.email.touched" class="text-red-500 text-xs">
-            This field is required</span>
-          <span *ngIf="form.controls.email.hasError('email') && form.controls.email.touched" class="text-red-500 text-xs">
-            Email invalid</span>
+          <span
+            *ngIf="
+              form.controls.email.hasError('required') &&
+              form.controls.email.touched
+            "
+            class="text-red-500 text-xs"
+          >
+            This field is required</span
+          >
+          <span
+            *ngIf="
+              form.controls.email.hasError('email') &&
+              form.controls.email.touched
+            "
+            class="text-red-500 text-xs"
+          >
+            Email invalid</span
+          >
           <input
+            #input
             class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
-            type="number"
+            type="text"
             placeholder="Your phone"
             formControlName="phone"
+            (keypress)="checkNumber(input.value, $event)"
           />
-          <span *ngIf="form.controls.phone.hasError('required') && form.controls.phone.touched" class="text-red-500 text-xs">
-            This field is required</span>
+          <span
+            *ngIf="
+              form.controls.phone.hasError('required') &&
+              form.controls.phone.touched
+            "
+            class="text-red-500 text-xs"
+          >
+            This field is required</span
+          >
+          <span
+            *ngIf="
+              form.controls.phone.hasError('max') && form.controls.phone.touched
+            "
+            class="text-red-500 text-xs"
+          >
+            Phonenumber should be less than 10 letter</span
+          >
           <textarea
             class="mt-10 h-28 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
             type="text"
             placeholder="Let's send message"
             formControlName="message"
           ></textarea>
-          <span *ngIf="form.controls.message.hasError('required') && form.controls.message.touched" class="text-red-500 text-xs">
-            This field is required</span>
-            <ng-container *ngIf="isLoading; else elseTemplate">
-              <div class="mt-5 ml-2">
-                <app-loading-small></app-loading-small>
-              </div>
-            </ng-container>
-            <ng-template #elseTemplate>
-              <div class="mt-5">
-                <app-button content="POST" [disabled]="form.invalid" (event)="submitContact()"></app-button>
-              </div>
-            </ng-template>
+          <span
+            *ngIf="
+              form.controls.message.hasError('required') &&
+              form.controls.message.touched
+            "
+            class="text-red-500 text-xs"
+          >
+            This field is required</span
+          >
+          <span
+            *ngIf="
+              form.controls.message.hasError('maxlength') &&
+              form.controls.message.touched
+            "
+            class="text-red-500 text-xs"
+          >
+            This field should be less than 300 letter</span
+          >
+          <ng-container *ngIf="isLoading; else elseTemplate">
+            <div class="mt-5 ml-2">
+              <app-loading-small></app-loading-small>
+            </div>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <div class="mt-5">
+              <app-button
+                content="POST"
+                [disabled]="form.invalid"
+                (event)="submitContact()"
+              ></app-button>
+            </div>
+          </ng-template>
         </div>
       </form>
     </div>
   </div>
-  <div class="py-20 bg-header-color mt-20">
-    <app-footer (goToSend)="gotoSendMessage()"></app-footer>
-  </div>
+</div>
+<div class="py-20 bg-header-color mt-20">
+  <app-footer (goToSend)="gotoSendMessage()"></app-footer>
 </div>

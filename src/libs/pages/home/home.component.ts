@@ -107,11 +107,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     this.form = new FormGroup({
       email: new FormControl('', { nonNullable: true, validators: [Validators.email, Validators.required] }),
-      name: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.pattern(/^[a-zA-Z0-9\s]+$/)] }),
-      message: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-      phone: new FormControl('', { nonNullable: true, validators: [Validators.required] })
+      name: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.pattern(/^[a-zA-Z0-9\s]+$/), Validators.maxLength(20)] }),
+      message: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.maxLength(300)] }),
+      phone: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.max(9999999999)], })
     })
   }
+
   ngAfterViewInit() {
     this.route.queryParams.subscribe((params) => {
       if (params['goto']) {
@@ -134,5 +135,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.isLoading = false
       this.form.reset()
     }), catchError((err) => err)).subscribe()
+  }
+
+  checkNumber(value: string, event: Event) {
+    const pattern = /([0 - 9])/g
+
+    console.log(pattern.test(value))
+    if (!pattern.test(value)) {
+      event.preventDefault()
+    }
   }
 }

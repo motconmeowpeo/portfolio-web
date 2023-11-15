@@ -1,16 +1,29 @@
-<form [formGroup]="formLogin" class="flex flex-col mt-20 max-w-7xl w-full m-auto">
-
-  <input class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
-    type="email" placeholder="Your email" formControlName="email" />
-  <input class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
-    type="password" placeholder="Your password" formControlName="password" />
-  <div class=" mt-5">
+<form
+  [formGroup]="formLogin"
+  class="flex flex-col mt-20 max-w-7xl w-full m-auto sm:p-0 p-4"
+>
+  <input
+    class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
+    type="email"
+    placeholder="Your email"
+    formControlName="email"
+  />
+  <input
+    class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
+    type="password"
+    placeholder="Your password"
+    formControlName="password"
+  />
+  <div class="mt-5">
     <ng-container *ngIf="isLoading; else elseTemplate">
       <app-loading-small></app-loading-small>
     </ng-container>
     <ng-template #elseTemplate>
-      <app-button [disabled]="formLogin.invalid" (event)="submit()" content="LOGIN"></app-button>
+      <app-button
+        [disabled]="formLogin.invalid"
+        (event)="submit()"
+        content="LOGIN"
+      ></app-button>
     </ng-template>
-
   </div>
 </form>

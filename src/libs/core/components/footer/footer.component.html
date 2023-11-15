@@ -1,8 +1,10 @@
-<div class="footer w-full max-w-7xl m-auto grid grid-cols-4 gap-20">
+<div
+  class="sm:p-0 p-4 footer w-full max-w-7xl m-auto grid sm:grid-cols-1 md:grid-cols-4 grid-cols-1 md:place-items-start sm:place-items-center place-items-center sm:gap-20 gap-5"
+>
   <!-- LOGO -->
   <div class="min-h-[240px] flex flex-col justify-between">
-    <div class="h-24 w-full">
-      <img src="assets/logo/logo.png" class="object-cover" alt="" />
+    <div class="h-24 w-full flex justify-center">
+      <img src="assets/logo/logo.png" class="object-contain" alt="" />
     </div>
     <div class="text-globaltext w-full">
       Authentic and innovative. Built to the smallest detail with a focus on
@@ -17,7 +19,11 @@
       </a>
     </div>
   </div>
-  <div class="min-h-[240px] flex flex-col">
+
+  <!-- Get in touch -->
+  <div
+    class="min-h-[240px] flex flex-col sm:justify-start sm:items-start justify-center items-center"
+  >
     <span class="text-white-text flex items-center h-24 text-2xl font-semibold"
       >Get in Touch</span
     >
@@ -37,7 +43,11 @@
       (event)="gotoSendMessage()"
     ></app-button>
   </div>
-  <div class="min-h-[240px] flex flex-col">
+
+  <!-- Service -->
+  <div
+    class="min-h-[240px] flex flex-col sm:justify-start sm:items-start justify-center items-center"
+  >
     <span class="text-white-text flex items-center h-24 text-2xl font-semibold"
       >Our Service</span
     >
@@ -50,7 +60,11 @@
       </li>
     </ul>
   </div>
-  <div class="min-h-[240px] sm:flex hidden flex-col">
+
+  <!-- Popular -->
+  <div
+    class="min-h-[240px] flex flex-col sm:justify-start sm:items-start justify-center items-center"
+  >
     <span class="text-white-text flex items-center h-24 text-2xl font-semibold"
       >Popular Tags</span
     >
