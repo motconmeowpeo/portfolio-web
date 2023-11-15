@@ -16,6 +16,7 @@ import { ButtonComponent } from '@core/ui';
 import { faRocket } from '@fortawesome/free-solid-svg-icons';
 import { RouterModule } from '@angular/router';
 import { NAV_ICON, NAV_MENU } from '@core/constants';
+import { AuthFacade } from '@core/services/auth';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -30,11 +31,12 @@ import { NAV_ICON, NAV_MENU } from '@core/constants';
 })
 export class HeaderComponent implements OnInit {
   @ViewChild('header') header!: ElementRef<HTMLDivElement>;
-  constructor(private cd: ChangeDetectorRef) {}
+  user$ = this.authFacade.user$
   readonly NAV_MENU = NAV_MENU;
   readonly NAV_ICON = NAV_ICON;
   readonly faRocket = faRocket;
 
+  constructor(private cd: ChangeDetectorRef, private authFacade: AuthFacade) { }
   ngOnInit(): void {
     AOS.init({
       duration: 400,

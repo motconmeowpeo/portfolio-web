@@ -40,7 +40,7 @@ export class BlogsComponent implements OnInit {
   user$ = this.authFacade.user$;
 
   constructor(
-    private routes: Router,
+    private router: Router,
     private postFacade: PostFacade,
     private authFacade: AuthFacade,
     private dialog: DialogService
@@ -62,7 +62,7 @@ export class BlogsComponent implements OnInit {
       .subscribe();
   }
   gotoSendMessage() {
-    this.routes.navigateByUrl('/home?goto=true');
+    this.router.navigateByUrl('/home?goto=true');
   }
 
   pageIndexChange(index: number) { }

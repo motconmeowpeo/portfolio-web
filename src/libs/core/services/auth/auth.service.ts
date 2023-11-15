@@ -3,15 +3,17 @@ import { Observable, map } from 'rxjs';
 import { HttpService } from '../http';
 import { IUser, ILogin, IToken, IAuth } from '@core/models';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 
-export const API_AUTH = 'https://portfolio-api-ten-vert.vercel.app/api/auth';
+export const API_AUTH = `${environment.apiUrl}/api/auth`;
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   constructor(
     private http: HttpService,
     private jwtService: JwtHelperService
-  ) {}
+  ) { }
 
   login(payload: Partial<ILogin>): Observable<IAuth> {
     return this.http

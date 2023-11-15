@@ -20,12 +20,12 @@ export class PostFacade {
     selectActiveEntity(),
     filter((post) => !!post)
   );
-  constructor(private postService: PostService) {}
+  constructor(private postService: PostService) { }
   getAll(params?: IBaseParams) {
     return this.postService.getAll(params).pipe(
       tap((posts) => {
-        const postMappingId = posts.map((post) => ({ ...post, id: post._id }));
-        store.update(setEntities(postMappingId));
+        const postsMappingId = posts.map((post) => ({ ...post, id: post._id }));
+        store.update(setEntities(postsMappingId));
       })
     );
   }

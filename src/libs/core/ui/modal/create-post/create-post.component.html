@@ -14,9 +14,9 @@
             ? 'border-primary border outline-primary'
             : 'border-primary-color border outline-primary-color'
         " type="text" placeholder="Title*" id="title" formControlName="title" autofocus></textarea>
-      <span *ngIf="formCreate.controls.title.hasError('required')" class="text-red-500 text-xs">
+      <span *ngIf="formCreate.controls.title.hasError('required') && formCreate.controls.title.touched" class="text-red-500 text-xs">
         This field is required</span>
-      <span *ngIf="formCreate.controls.title.hasError('pattern')" class="text-red-500 text-xs">
+      <span *ngIf="formCreate.controls.title.hasError('pattern') && formCreate.controls.title.touched" class="text-red-500 text-xs">
         Title should be text and number</span>
     </div>
     <div class="mt-5 p-4 pt-2">

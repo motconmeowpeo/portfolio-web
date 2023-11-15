@@ -5,12 +5,13 @@ import { IBaseParams } from '../../models/base.model';
 import { IPost, IPostCommand } from '../../models/post.model';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthFacade } from '../auth/auth.facade';
+import { environment } from 'src/environments/environment';
 
-export const API_POST = 'https://portfolio-api-ten-vert.vercel.app/api/post';
+export const API_POST = `${environment.apiUrl}/api/post`;
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
-  constructor(private http: HttpService, private authFacade: AuthFacade) {}
+  constructor(private http: HttpService, private authFacade: AuthFacade) { }
 
   getAll(params?: IBaseParams): Observable<IPost[]> {
     // return this.http.get<IHero[]>(API_URL);

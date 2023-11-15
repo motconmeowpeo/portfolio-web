@@ -1,33 +1,22 @@
-<div
-  #header
-  class="header h-24 duration-300 transition-all w-full z-50 bg-header-color flex items-center justify-center shadow-current sticky top-0"
->
+<div #header
+  class="header h-24 duration-300 transition-all w-full z-50 bg-header-color flex items-center justify-center shadow-current sticky top-0">
   <div class="w-full max-w-7xl m-auto flex justify-between items-center">
     <!-- LOGO -->
-    <div
-      class="h-full w-40 flex items-center justify-center"
-      data-aos="zoom-out-right"
-    >
-      <img
-        src="assets/logo/logo.png"
-        routerLink="/"
-        class="object-cover cursor-pointer"
-        alt=""
-      />
+    <div class="h-full w-40 flex items-center justify-center" data-aos="zoom-out-right">
+      <img src="assets/logo/logo.png" routerLink="/" class="object-cover cursor-pointer" alt="" />
     </div>
 
     <!-- MENU -->
-    <ul
-      class="text-white-text font-semibold flex items-center px-4 py-5"
-      data-aos="zoom-out-left"
-    >
-      <li
-        *ngFor="let item of NAV_MENU"
+    <ul class="text-white-text font-semibold flex items-center px-4 py-5" data-aos="zoom-out-left">
+      <li *ngFor="let item of NAV_MENU"
         class="text-lg hover:text-secondary hover:-translate-y-px duration-300 transition-all cursor-pointer px-4"
-        [routerLink]="item.path"
-        routerLinkActive="active-router"
-      >
+        [routerLink]="item.path" routerLinkActive="active-router">
         {{ item.name }}
+      </li>
+      <li *ngIf="user$|async"
+        class="text-lg hover:text-secondary hover:-translate-y-px duration-300 transition-all cursor-pointer px-4"
+        [routerLink]="'contact'" routerLinkActive="active-router">
+        Contact
       </li>
     </ul>
     <!-- ICON -->
@@ -35,8 +24,7 @@
       <a *ngFor="let item of NAV_ICON" [href]="item.link" target="_blank">
         <fa-icon
           class="px-2 text-xl text-white-text cursor-pointer hover:text-primary hover:-translate-y-px duration-300 transition-all mr-2"
-          [icon]="item.icon"
-        ></fa-icon>
+          [icon]="item.icon"></fa-icon>
       </a>
       <div class="ml-2 hidden">
         <app-button content="LOG IN" [icon]="faRocket"></app-button>

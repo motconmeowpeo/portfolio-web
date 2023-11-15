@@ -139,7 +139,7 @@
 
     <div #message class="mt-20 w-full h-fit flex flex-col">
       <app-horizontal class="" [selfRight]="true"></app-horizontal>
-      <div class="mt-20 w-full max-w-7xl m-auto flex flex-col">
+      <form class="mt-20 w-full max-w-7xl m-auto flex flex-col" [formGroup]="form">
         <!-- SEND -->
         <div class="flex flex-col self-start w-1/2">
           <span
@@ -159,27 +159,50 @@
             class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
             type="text"
             placeholder="Your name"
+            formControlName="name"
           />
+          <span *ngIf="form.controls.name.hasError('required') && form.controls.name.touched" class="text-red-500 text-xs">
+            This field is required</span>
+            <span *ngIf="form.controls.email.hasError('pattern') && form.controls.name.touched" class="text-red-500 text-xs">
+              Name should be text and number</span>
           <input
             class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
             type="text"
             placeholder="Your email"
+            formControlName="email"
           />
+          <span *ngIf="form.controls.email.hasError('required') && form.controls.email.touched" class="text-red-500 text-xs">
+            This field is required</span>
+          <span *ngIf="form.controls.email.hasError('email') && form.controls.email.touched" class="text-red-500 text-xs">
+            Email invalid</span>
           <input
             class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
-            type="text"
+            type="number"
             placeholder="Your phone"
+            formControlName="phone"
           />
+          <span *ngIf="form.controls.phone.hasError('required') && form.controls.phone.touched" class="text-red-500 text-xs">
+            This field is required</span>
           <textarea
             class="mt-10 h-28 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
             type="text"
             placeholder="Let's send message"
+            formControlName="message"
           ></textarea>
-          <div class="mt-10">
-            <app-button content="SEND" [icon]="faPaperPlane"></app-button>
-          </div>
+          <span *ngIf="form.controls.message.hasError('required') && form.controls.message.touched" class="text-red-500 text-xs">
+            This field is required</span>
+            <ng-container *ngIf="isLoading; else elseTemplate">
+              <div class="mt-5 ml-2">
+                <app-loading-small></app-loading-small>
+              </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <div class="mt-5">
+                <app-button content="POST" [disabled]="form.invalid" (event)="submitContact()"></app-button>
+              </div>
+            </ng-template>
         </div>
-      </div>
+      </form>
     </div>
   </div>
   <div class="py-20 bg-header-color mt-20">

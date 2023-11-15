@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BlogsComponent } from '../libs/pages/blogs/blogs.component';
 import { LoginGuard } from '@pages/login';
 import { PostDetailComponent } from '../libs/pages/post-detail/post-detail.component';
+import { ContactGuard } from '@pages/contact';
 
 const routes: Routes = [
   {
@@ -27,6 +28,11 @@ const routes: Routes = [
     path: 'admin',
     loadComponent: () => import('@pages/login').then((page) => page.LoginComponent),
     canActivate: [LoginGuard]
+  },
+  {
+    path: 'contact',
+    loadComponent: () => import('@pages/contact').then((page) => page.ContactComponent),
+    canActivate: [ContactGuard]
   },
   {
     path: '**',
