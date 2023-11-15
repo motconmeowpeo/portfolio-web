@@ -18,7 +18,14 @@ export class ContactService {
 
     getAll(params?: IBaseParams): Observable<IContact[]> {
         // return this.http.get<IHero[]>(API_URL);
-        return this.http.get<IContact[]>(API_CONTACT, { params });
+        return this.authFacade.accessToken$.pipe(
+            switchMap((token) => {
+                const headers = new HttpHeaders({
+                    Authorization: token!,
+                });
+                return this.http.get<IContact[]>(API_CONTACT, { params, headers });
+            })
+        );
     }
 
     create(payload: Partial<IContactCommand>): Observable<IContact> {
