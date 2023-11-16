@@ -1,5 +1,6 @@
 <div class="post relative group border border-border-color">
-  <section class="flex relative group cursor-pointer" [routerLink]="['/post/' + post.id]">
+  <section class="flex relative group cursor-pointer" [routerLink]="'/post/' + post.id"
+    [queryParams]="{q:search||undefined}">
     <div class="image sm:h-96 h-60 w-full">
       <img *ngIf="post.images && post.images?.length" [src]="URL_IMAGE + post.images[0]" alt=""
         class="h-full w-full overflow-hidden object-cover" />
@@ -11,14 +12,15 @@
     </div>
     <div class="info flex flex-col ml-2 justify-between top-0 left-0 bottom-0 right-0 absolute sm:p-4 p-[2px]">
       <div class="flex flex-col justify-center h-full">
-        <ng-container *ngIf="isLoading; else elseTemplate">
+        <ng-container *ngIf="isLoading;">
           <div class="h-full w-full flex items-center justify-center">
             <app-loading-small></app-loading-small>
           </div>
         </ng-container>
-        <ng-template #elseTemplate>
-          <span class="text-white-text text-xl font-semibold self-center line-clamp-2">{{ post.title }}</span>
-        </ng-template>
+        <div *ngIf="!isLoading" class="text-white-text text-xl font-semibold self-center text-center w-full truncate">
+          {{
+          post.title
+          }}</div>
       </div>
       <div class="flex justify-between w-full">
         <div class="text-white-text sm:block hidden">
@@ -39,7 +41,7 @@
         </i>
 
         <!-- Menu -->
-        <ul class="flex flex-col bg-white shadow-base p-1 rounded text-xs" menuContent>
+        <ul class=" list-noneflex flex-col m-0  bg-white shadow-base p-1 rounded text-xs" menuContent>
           <ng-container>
             <!-- Edit -->
             <li (click)="openEditPost()"

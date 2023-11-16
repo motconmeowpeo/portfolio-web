@@ -15,6 +15,7 @@ export class ButtonComponent {
   @Input() type: string = 'primary' || 'secondary';
   @Input() icon!: IconDefinition;
   @Input() disabled = false;
+  @Input() link!: string
   @Output() event: EventEmitter<void> = new EventEmitter();
 
   buttonClickEvt() {

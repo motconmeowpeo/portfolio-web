@@ -35,6 +35,7 @@ export class PostItemComponent implements OnInit {
   user$ = this.authFacade.user$;
   safeHtml!: SafeHtml;
   @Input() post!: IPost;
+  @Input() search!: string;
 
   constructor(
     private sanitizer: DomSanitizer,

@@ -1,197 +1,113 @@
 <ng-container *ngIf="post$ | async as post; else loadingTemplate">
-  <div
-    class="text-white max-w-7xl w-full m-auto mt-20 p-4 border border-border-color"
-  >
-    <div class="flex justify-evenly">
-      <span
-        class="text-xl sm:text-4xl text-white text-center whitespace-nowrap sm:whitespace-normal"
-        >{{ post.title }}</span
-      >
-      <div class="flex ml-5 gap-4">
-        <span
-          class="flex items-end text-globaltext sm:text-base text-xs whitespace-nowrap sm:whitespace-normal"
-          >{{ post.createBy }}</span
-        >
-        <span
-          class="flex items-end text-globaltext sm:text-base text-xs whitespace-nowrap sm:whitespace-normal"
-          >{{ formatDate(post.createAt) }}</span
-        >
+
+  <div class="text-white max-w-7xl w-full m-auto mt-20 p-4 border border-border-color">
+    <div class="text-globaltext cursor-pointer" [routerLink]="['/blog']" [queryParams]="{q:search||undefined}">
+      <fa-icon [icon]="faChevronLeft"></fa-icon>
+      <span class="ml-2">Back</span>
+    </div>
+    <div class="flex flex-col ">
+      <span class="indent-14 text-xl col-span-3 sm:text-4xl text-white text-start break-words">{{
+        post.title
+        }}</span>
+      <div class="flex ml-14 gap-4">
+        <span class="flex items-start text-globaltext sm:text-base text-xs whitespace-nowrap sm:whitespace-normal">{{
+          post.createBy }}</span>
+        <span class="flex items-start text-globaltext sm:text-base text-xs whitespace-nowrap sm:whitespace-normal">{{
+          formatDate(post.createAt) }}</span>
       </div>
     </div>
 
     <nz-image-group>
       <!-- SLICK -->
-      <div
-        class="grid grid-cols-4 grid-rows-2 gap-4 mt-20"
-        *ngIf="post.images && post.images.length === 4"
-      >
+      <div class="grid grid-cols-4 grid-rows-2 gap-4 mt-20" *ngIf="post.images && post.images.length === 4">
         <ng-container *ngFor="let image of post.images; let i = index">
           <ng-container [ngSwitch]="i">
             <ng-container *ngSwitchCase="0">
-              <div
-                class="cursor-pointer h-96 w-full rounded-sm row-start-1 row-end-2 col-start-1 col-end-2"
-              >
-                <img
-                  nz-image
-                  class="overflow-hidden w-full h-full object-cover rounded-sm"
-                  [nzSrc]="URL_IMAGE + image"
-                  alt=""
-                />
+              <div class="cursor-pointer h-96 w-full rounded-sm row-start-1 row-end-2 col-start-1 col-end-2">
+                <img nz-image class="overflow-hidden w-full h-full object-cover rounded-sm" [nzSrc]="URL_IMAGE + image"
+                  alt="" />
               </div>
             </ng-container>
             <ng-container *ngSwitchCase="1">
-              <div
-                class="cursor-pointer h-96 w-full rounded-sm row-start-2 row-end-3 col-start-1 col-end-2"
-              >
-                <img
-                  nz-image
-                  class="overflow-hidden w-full h-full object-cover rounded-sm"
-                  [nzSrc]="URL_IMAGE + image"
-                  alt=""
-                />
+              <div class="cursor-pointer h-96 w-full rounded-sm row-start-2 row-end-3 col-start-1 col-end-2">
+                <img nz-image class="overflow-hidden w-full h-full object-cover rounded-sm" [nzSrc]="URL_IMAGE + image"
+                  alt="" />
               </div>
             </ng-container>
             <ng-container *ngSwitchCase="2">
-              <div
-                class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-3 col-start-2 col-end-4"
-              >
-                <img
-                  nz-image
-                  class="overflow-hidden w-full h-full object-cover rounded-sm"
-                  [nzSrc]="URL_IMAGE + image"
-                  alt=""
-                />
+              <div class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-3 col-start-2 col-end-4">
+                <img nz-image class="overflow-hidden w-full h-full object-cover rounded-sm" [nzSrc]="URL_IMAGE + image"
+                  alt="" />
               </div>
             </ng-container>
             <ng-container *ngSwitchCase="3">
-              <div
-                class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-3"
-              >
-                <img
-                  nz-image
-                  class="overflow-hidden w-full h-full object-cover rounded-sm"
-                  [nzSrc]="URL_IMAGE + image"
-                  alt=""
-                />
+              <div class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-3">
+                <img nz-image class="overflow-hidden w-full h-full object-cover rounded-sm" [nzSrc]="URL_IMAGE + image"
+                  alt="" />
               </div>
             </ng-container>
           </ng-container>
         </ng-container>
       </div>
-      <div
-        class="grid grid-cols-4 grid-rows-2 gap-4 mt-20"
-        *ngIf="post.images && post.images.length > 4"
-      >
+      <div class="grid grid-cols-4 grid-rows-2 gap-4 mt-20" *ngIf="post.images && post.images.length > 4">
         <ng-container *ngFor="let image of post.images; let i = index">
           <ng-container [ngSwitch]="i">
             <ng-container *ngSwitchCase="0">
-              <div
-                class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-3 col-start-1 col-end-2"
-              >
-                <img
-                  nz-image
-                  class="overflow-hidden w-full h-full object-cover rounded-sm"
-                  [nzSrc]="URL_IMAGE + image"
-                  alt=""
-                />
+              <div class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-3 col-start-1 col-end-2">
+                <img nz-image class="overflow-hidden w-full h-full object-cover rounded-sm" [nzSrc]="URL_IMAGE + image"
+                  alt="" />
               </div>
             </ng-container>
             <ng-container *ngSwitchCase="1">
-              <div
-                class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-3 col-start-2 col-end-4"
-              >
-                <img
-                  nz-image
-                  class="overflow-hidden w-full h-full object-cover rounded-sm"
-                  [nzSrc]="URL_IMAGE + image"
-                  alt=""
-                />
+              <div class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-3 col-start-2 col-end-4">
+                <img nz-image class="overflow-hidden w-full h-full object-cover rounded-sm" [nzSrc]="URL_IMAGE + image"
+                  alt="" />
               </div>
             </ng-container>
             <ng-container *ngSwitchCase="2">
-              <div
-                class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-2 col-start-4 col-end-5"
-              >
-                <img
-                  nz-image
-                  class="overflow-hidden w-full h-full object-cover rounded-sm"
-                  [nzSrc]="URL_IMAGE + image"
-                  alt=""
-                />
+              <div class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-2 col-start-4 col-end-5">
+                <img nz-image class="overflow-hidden w-full h-full object-cover rounded-sm" [nzSrc]="URL_IMAGE + image"
+                  alt="" />
               </div>
             </ng-container>
             <ng-container *ngSwitchCase="3">
-              <div
-                class="cursor-pointer min-h-96 w-full rounded-sm row-start-2 row-end-3 relative group"
-              >
-                <img
-                  nz-image
-                  class="overflow-hidden w-full h-full object-cover rounded-sm"
-                  [nzSrc]="URL_IMAGE + image"
-                  alt=""
-                />
+              <div class="cursor-pointer min-h-96 w-full rounded-sm row-start-2 row-end-3 relative group">
+                <img nz-image class="overflow-hidden w-full h-full object-cover rounded-sm" [nzSrc]="URL_IMAGE + image"
+                  alt="" />
                 <div
-                  class="absolute top-0 bottom-0 right-0 left-0 bg-black opacity-60 text-3xl font-semibold flex items-center justify-center group-hover:hidden duration-500 transition-all"
-                >
+                  class="absolute top-0 bottom-0 right-0 left-0 bg-black opacity-60 text-3xl font-semibold flex items-center justify-center group-hover:hidden duration-500 transition-all">
                   +{{ post.images.length - 3 }}
                 </div>
               </div>
             </ng-container>
             <ng-container *ngSwitchDefault>
-              <div
-                class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-2 col-start-4 col-end-5 hidden"
-              >
-                <img
-                  nz-image
-                  class="overflow-hidden w-full h-full object-cover rounded-sm"
-                  [nzSrc]="URL_IMAGE + image"
-                  alt=""
-                />
+              <div class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-2 col-start-4 col-end-5 hidden">
+                <img nz-image class="overflow-hidden w-full h-full object-cover rounded-sm" [nzSrc]="URL_IMAGE + image"
+                  alt="" />
               </div>
             </ng-container>
           </ng-container>
         </ng-container>
       </div>
-      <div
-        class="grid grid-cols-3 grid-rows-2 gap-4 mt-20"
-        *ngIf="post.images && post.images.length < 4"
-      >
+      <div class="grid grid-cols-3 grid-rows-2 gap-4 mt-20" *ngIf="post.images && post.images.length < 4">
         <ng-container *ngFor="let image of post.images; let i = index">
           <ng-container [ngSwitch]="i">
             <ng-container *ngSwitchCase="0">
-              <div
-                class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-3 col-start-1 col-end-3"
-              >
-                <img
-                  nz-image
-                  class="overflow-hidden w-full h-full object-cover rounded-sm"
-                  [nzSrc]="URL_IMAGE + image"
-                  alt=""
-                />
+              <div class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-3 col-start-1 col-end-3">
+                <img nz-image class="overflow-hidden w-full h-full object-cover rounded-sm" [nzSrc]="URL_IMAGE + image"
+                  alt="" />
               </div>
             </ng-container>
             <ng-container *ngSwitchCase="1">
-              <div
-                class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-2 col-start-3 col-end-4"
-              >
-                <img
-                  nz-image
-                  class="overflow-hidden w-full h-full object-cover rounded-sm"
-                  [nzSrc]="URL_IMAGE + image"
-                  alt=""
-                />
+              <div class="cursor-pointer min-h-96 w-full rounded-sm row-start-1 row-end-2 col-start-3 col-end-4">
+                <img nz-image class="overflow-hidden w-full h-full object-cover rounded-sm" [nzSrc]="URL_IMAGE + image"
+                  alt="" />
               </div>
             </ng-container>
             <ng-container *ngSwitchCase="2">
-              <div
-                class="cursor-pointer min-h-96 w-full rounded-sm row-start-2 row-end-3 col-start-3 col-end-4"
-              >
-                <img
-                  nz-image
-                  class="overflow-hidden w-full h-full object-cover rounded-sm"
-                  [nzSrc]="URL_IMAGE + image"
-                  alt=""
-                />
+              <div class="cursor-pointer min-h-96 w-full rounded-sm row-start-2 row-end-3 col-start-3 col-end-4">
+                <img nz-image class="overflow-hidden w-full h-full object-cover rounded-sm" [nzSrc]="URL_IMAGE + image"
+                  alt="" />
               </div>
             </ng-container>
           </ng-container>
@@ -200,7 +116,7 @@
     </nz-image-group>
 
     <!-- DES -->
-    <div class="mt-20" [innerHTML]="safeHtml"></div>
+    <div class="indent-6 mt-20 w-full break-words" [innerHTML]="safeHtml"></div>
   </div>
 </ng-container>
 

@@ -1,14 +1,22 @@
 <div class="blog w-full max-w-7xl m-auto mt-20 sm:p-0 p-4">
-  <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 w-full items-center" *ngIf="user$ | async">
-    <div class="group relative h-fit sm:w-full w-2/3 flex items-center  cursor-pointer" (click)="openModal()">
+  <div class="grid sm:grid-cols-3 grid-cols-4 gap-8 w-full items-center">
+    <div *ngIf="user$ | async"
+      class="group col-span-1 relative bg-header-color border transition-all duration-300 hover:border-primary border-border-color rounded-md h-fit w-full flex items-center sm:justify-normal justify-center cursor-pointer min-h-[60px]"
+      (click)="openModal()">
       <button
-        class="h-15 p-4 w-full group-hover:border-primary text-globaltext transition-all duration-300 cursor-pointer rounded-md outline-none bg-header-color border border-border-color">
-        Click here to post
+        class="h-full sm:inline hidden p-4 w-full  text-globaltext transition-all duration-300 cursor-pointer rounded-md outline-none bg-header-color border border-border-color">
+        <span class="">Click here to post</span>
       </button>
       <fa-icon
-        class="absolute group-hover:text-primary transition-all duration-300 sm:right-8 right-6 top-0 bottom-0 translate-y-[calc(50%-10px)] z-10 text-white"
+        class="sm:absolute static group-hover:text-primary transition-all duration-300 sm:right-8 right-6 top-0 bottom-0 sm:translate-y-[calc(50%-10px)] z-10 text-white"
         [icon]="faPaperPlane"></fa-icon>
     </div>
+    <form [formGroup]="form" class="sm:col-span-1 col-span-3 min-h-[60px] ">
+      <input
+        class="min-h-[60px] p-4 w-full rounded-md outline-none hover:border-primary transition-all duration-300 bg-header-color border border-border-color focus:border-primary text-white-text"
+        type="text" placeholder="Search by content...." formControlName="search" />
+    </form>
+
   </div>
   <ng-container *ngIf="!isLoading; else loadingTemplate">
     <ng-container *ngIf="posts$ | async as posts">
@@ -16,7 +24,7 @@
         <div class="mt-20">
           <div class="grid sm:grid-cols-3 grid-cols-2 sm:gap-8 gap-4">
             <ng-container *ngFor="let item of posts">
-              <app-post-item [post]="item"></app-post-item>
+              <app-post-item [search]="search" [post]="item"></app-post-item>
             </ng-container>
           </div>
         </div>

@@ -1,8 +1,7 @@
-<button
+<div
   *ngIf="type === 'primary'"
   class="bg-gradient-to-r from-secondary to-primary w-fit py-[1px] px-[1px] flex items-center justify-center disabled:from-slate-500 disabled:to-slate-500 disabled:cursor-not-allowed"
   [ngClass]="className"
-  [disabled]="disabled"
 >
   <button
     [disabled]="disabled"
@@ -12,7 +11,7 @@
     <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
     <span [ngClass]="icon ? 'ml-3' : ''">{{ content }}</span>
   </button>
-</button>
+</div>
 
 <button
   *ngIf="type === 'secondary'"

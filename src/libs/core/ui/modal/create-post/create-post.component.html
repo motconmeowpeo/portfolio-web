@@ -21,8 +21,12 @@
         class="text-red-500 text-xs">
         Title should be text and number</span>
     </div>
-    <div class="mt-5 p-4 pt-2">
-      <ckeditor [formControl]="formCreate.controls.description"></ckeditor>
+    <div class="editor mt-5 p-4 pt-2 relative">
+      <!-- <ckeditor [formControl]="formCreate.controls.description"></ckeditor> -->
+      <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+      </ngx-editor-menu>
+      <ngx-editor [editor]="editor" [spellcheck]="true" formControlName="description">
+      </ngx-editor>
       <span *ngIf="formCreate.controls.description.hasError('required')" class="text-red-500 text-xs">
         This field is required</span>
     </div>

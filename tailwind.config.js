@@ -28,8 +28,12 @@ module.exports = {
       fontFamily: {
         'josefin': ['Josefin Sans', 'sans-serif']
       },
+      borderRadius: {
+        '1/2': '50%'
+      }
     },
   },
+
   plugins: [],
 }
 

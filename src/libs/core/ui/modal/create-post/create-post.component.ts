@@ -19,6 +19,7 @@ import { URL_IMAGE } from '@core/constants';
 import { AuthFacade } from '@core/services/auth';
 import { LoadingSmallComponent } from '@core/components/loading-small';
 import { IPost } from '@core/models';
+import { Editor, NgxEditorModule, Toolbar } from 'ngx-editor';
 
 export interface ICreatePostForm {
   title: FormControl<string>;
@@ -40,13 +41,28 @@ export interface IData {
     ReactiveFormsModule,
     ButtonComponent,
     CKEditorModule,
-    LoadingSmallComponent
+    LoadingSmallComponent,
+    NgxEditorModule
   ],
   templateUrl: './create-post.component.html',
+  styleUrls: ['./create-post.component.scss']
 })
 export class CreatePostComponent implements OnInit, OnDestroy {
   readonly faImage = faImage;
   readonly URL_IMAGE = URL_IMAGE;
+
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
+
+  editor!: Editor;
 
   formCreate!: FormGroup<ICreatePostForm>;
   preview: string[] = [];
@@ -61,7 +77,9 @@ export class CreatePostComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.editor = new Editor();
     this.createForm();
+
   }
 
   constructor(
@@ -75,6 +93,7 @@ export class CreatePostComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnDestroy(): void {
+    this.editor.destroy();
     this.cd.detectChanges();
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
@@ -122,19 +141,23 @@ export class CreatePostComponent implements OnInit, OnDestroy {
 
   async submitPost() {
     this.isLoading = true;
+    const now = new Date().getTime();
+    const newFiles = this.formCreate.controls.images.value.map((file) => {
+      return new File([file], file.name.replace('.', `${now}.`), { type: file.type })
+    })
     if (!this.data) {
-      await this.fileService.upload(this.formCreate.controls.images.value);
+      await this.fileService.upload(newFiles);
       this.user$.subscribe((user) => {
         if (user) {
-          this.createPost(user.username);
+          this.createPost(user.username, newFiles);
         }
       });
     }
     else {
-      await this.fileService.upload(this.formCreate.controls.images.value);
+      await this.fileService.upload(newFiles);
       this.user$.subscribe((user) => {
         if (user) {
-          this.updatePost();
+          this.updatePost(newFiles);
         }
       });
     }
@@ -145,11 +168,10 @@ export class CreatePostComponent implements OnInit, OnDestroy {
     this.dialogRef.close();
   }
 
-  createPost(createBy: string) {
-    const images = this.formCreate.controls.images.value.map(
+  createPost(createBy: string, newFiles: File[]) {
+    const images = newFiles.map(
       (file) => file.name
     );
-
     this.postFacade
       .create({ ...this.formCreate.value, images, createBy })
       .pipe(
@@ -164,16 +186,16 @@ export class CreatePostComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  async updatePost() {
-    const images = this.formCreate.controls.images.value.map(
+  async updatePost(newFiles: File[]) {
+    const imageNames = newFiles.map(
       (file) => file.name
     );
-    const currentImages = this.data.post.images?.filter((img) => !images.includes(img)) || []
+    const images = imageNames?.length ? imageNames : this.data.post.images
     this.postFacade
       .update({ ...this.formCreate.value, images, id: this.data.post.id })
       .pipe(
         tap(() => {
-          this.fileService.delete(currentImages)
+          this.data.post.images && this.fileService.delete(this.data.post.images)
           this.close();
         }),
         catchError((er) => {
