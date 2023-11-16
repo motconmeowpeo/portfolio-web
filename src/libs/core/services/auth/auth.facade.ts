@@ -9,7 +9,7 @@ import { select } from '@ngneat/elf';
 export class AuthFacade {
   accessToken$ = store.pipe(select((state) => state.accessToken));
   user$ = store.pipe(select((state) => state.user));
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   login(payload: Partial<ILogin>): Observable<IAuth> {
     return this.authService.login(payload).pipe(
@@ -36,5 +36,9 @@ export class AuthFacade {
       ...state,
       ...data,
     }));
+  }
+
+  logOut() {
+    store.reset()
   }
 }

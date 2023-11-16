@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, switchMap } from 'rxjs';
 import { HttpService } from '../http';
-import { IBaseParams } from '../../models/base.model';
-import { IPost, IPostCommand } from '../../models/post.model';
+import { IBaseParams } from '@core/models';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthFacade } from '../auth/auth.facade';
 import { IContact, IContactCommand } from '@core/models';

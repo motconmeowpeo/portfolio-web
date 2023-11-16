@@ -1,36 +1,21 @@
 <div class="relative sm:p-0 p-4">
   <div class="relative h-banner w-full">
-    <video
-      class="object-cover w-full h-full"
-      autoplay
-      [muted]="'muted'"
-      loop
-      playsInline
-    >
+    <video class="object-cover w-full h-full" autoplay [muted]="'muted'" loop playsInline>
       <source src="assets/video/video.mp4" type="video/mp4" />
       <source src="assets/video/video.mp4" type="video/ogg" />
     </video>
     <!-- Intro -->
-    <div
-      class="intro absolute top-0 left-0 right-0 bottom-0 max-w-7xl m-auto w-full z-10 translate-y-[30%]"
-    >
+    <div class="intro absolute top-0 left-0 right-0 bottom-0 max-w-7xl m-auto w-full z-10 translate-y-[30%]">
       <div class="max-w-md p-2">
         <h1
-          class="neon-text text-transparent sm:text-7xl text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text"
-        >
+          class="neon-text text-transparent sm:text-7xl text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text">
           Hello Guys! I'm Nika.
         </h1>
-        <span
-          class="text-white-text mt-5 text-base md:text-lg sm:text-base inline-block"
-          >I am an enthusiast of technology and develop. My work is related to
-          digital solutions that can help you achieve better results.</span
-        >
+        <span class="text-white-text mt-5 text-base md:text-lg sm:text-base inline-block">I am an enthusiast of
+          technology and develop. My work is related to
+          digital solutions that can help you achieve better results.</span>
         <div class="mt-5">
-          <app-button
-            [icon]="faMugHot"
-            content="GET STARTED"
-            (event)="gotoSkills()"
-          ></app-button>
+          <app-button [icon]="faMugHot" content="GET STARTED" (event)="gotoSkills()"></app-button>
         </div>
       </div>
     </div>
@@ -41,29 +26,19 @@
       <!-- SKILL -->
       <div class="flex flex-col">
         <span
-          class="text-transparent text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5"
-        >
-          <span
-            class="w-1/2 h-1 bg-gradient-to-r from-secondary to-primary absolute z-10 top-0"
-          ></span>
+          class="text-transparent text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5">
+          <span class="w-1/2 h-1 bg-gradient-to-r from-secondary to-primary absolute z-10 top-0"></span>
           My Skills
         </span>
-        <span class="text-white-text text-base sm:text-lg"
-          >Focused on results i seek to raise the level of myself.</span
-        >
+        <span class="text-white-text text-base sm:text-lg">Focused on results i seek to raise the level of
+          myself.</span>
       </div>
 
       <!-- My Skill -->
-      <div
-        class="parent z-0 grid sm:grid-cols-3 grid-cols-2 sm:gap-4 gap-1 mt-5 relative pb-4 pr-4 pt-1 pl-1"
-      >
+      <div class="parent z-0 grid sm:grid-cols-3 grid-cols-2 sm:gap-4 gap-1 mt-5 relative pb-4 pr-4 pt-1 pl-1">
         <div class="col-span-1 m-4" *ngFor="let item of SKILLS">
-          <app-skill-item
-            [name]="item.name"
-            [desc]="item.desc"
-            [icon]="item.icon"
-            [color]="item.color"
-          ></app-skill-item>
+          <app-skill-item [name]="item.name" [desc]="item.desc" [icon]="item.icon"
+            [color]="item.color"></app-skill-item>
         </div>
       </div>
     </div>
@@ -74,59 +49,36 @@
       <!-- SEND -->
       <div class="flex flex-col self-end w-1/2">
         <span
-          class="text-transparent text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5"
-        >
-          <span
-            class="send-message w-full h-1 bg-gradient-to-r from-secondary to-primary absolute z-10 top-0"
-          ></span>
+          class="text-transparent text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5">
+          <span class="send-message w-full h-1 bg-gradient-to-r from-secondary to-primary absolute z-10 top-0"></span>
           Experience And Education
         </span>
-        <span class="text-white-text sm:text-lg text-base"
-          >I see all types of projects as if they were mine. This brings me
+        <span class="text-white-text sm:text-lg text-base">I see all types of projects as if they were mine. This brings
+          me
           closer to our clients' projects bringing much more confidence and
-          commitment.</span
-        >
+          commitment.</span>
       </div>
       <div class="sm:flex hidden flex-col mt-10 self-end w-1/2">
         <div class="flex h-20">
           <span class="sm:inline hidden">
-            <svg
-              width="80"
-              height="80"
-              viewBox="0 0 100 100"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M99.6248 82.0393L81.3699 48.2095C83.2322 43.9738 84.2741 39.2925 84.2741 34.3675C84.2741 15.3863 68.9186 0 49.9788 0C31.0344 0 15.6804 15.3878 15.6804 34.3675C15.6804 39.4113 16.7738 44.1973 18.7203 48.5112L0.384139 82.0237C-0.207096 83.1006 -0.108833 84.4292 0.630479 85.4123C1.37135 86.3924 2.62225 86.8534 3.81691 86.5722L19.475 82.9726L24.8342 97.9306C25.2523 99.0935 26.3113 99.9 27.5388 99.9906C27.6185 99.9969 27.6948 100 27.7697 100C28.3337 99.9998 28.8872 99.8463 29.3711 99.556C29.855 99.2656 30.2514 98.8492 30.5179 98.351L46.4755 68.5586C47.639 68.6767 48.8076 68.7356 49.9771 68.7352C51.0611 68.7352 52.131 68.6789 53.1885 68.5789L69.4923 98.3746C69.7808 98.9027 70.2155 99.3361 70.744 99.6225C71.2725 99.9089 71.8724 100.036 72.4714 99.9891C73.6958 99.8906 74.7501 99.0856 75.1649 97.929L80.5242 82.971L96.1823 86.5706C97.3833 86.8612 98.6217 86.3939 99.3626 85.417C100.107 84.4417 100.206 83.1194 99.6246 82.0393H99.6248ZM28.3372 89.2073L24.4127 78.2505C23.8762 76.761 22.3197 75.8935 20.7786 76.2608L9.19758 78.9226L22.3978 54.796C26.7447 60.6807 32.9212 65.1196 40.0851 67.2798L28.3372 89.2073ZM21.9469 34.3674C21.9469 18.8795 34.5231 6.27852 49.9799 6.27852C65.4353 6.27852 78.0098 18.8795 78.0098 34.3674C78.0098 49.8553 65.4353 62.4594 49.9799 62.4594C34.5214 62.4594 21.9469 49.8553 21.9469 34.3674ZM79.2201 76.2607C77.6729 75.8949 76.1225 76.7609 75.586 78.2503L71.6351 89.2867L59.6298 67.3499C66.984 65.1913 73.3103 60.6353 77.7134 54.5786L90.8588 78.935L79.2201 76.2607Z"
-                fill="#65FF00"
-              />
+                fill="#65FF00" />
             </svg>
           </span>
           <div class="text-white-text flex flex-col ml-5 justify-around">
-            <span class="font-medium text-lg"
-              >Saigon Technology University</span
-            >
-            <span class="text-globaltext"
-              >Major: Information Technology GPA-7.91</span
-            >
+            <span class="font-medium text-lg">Saigon Technology University</span>
+            <span class="text-globaltext">Major: Information Technology GPA-7.91</span>
           </div>
         </div>
         <div class="flex mt-5 h-20">
-          <span class="sm:inline hidden"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              x="0px"
-              y="0px"
-              width="80"
-              height="80"
-              viewBox="0 0 32 32"
-            >
-              <path
-                fill="#65FF00"
-                d="M 16 3 C 14.136719 3 12.601563 4.277344 12.15625 6 L 3 6 L 3 26 L 29 26 L 29 6 L 19.84375 6 C 19.398438 4.277344 17.863281 3 16 3 Z M 16 5 C 16.808594 5 17.429688 5.386719 17.75 6 L 14.25 6 C 14.570313 5.386719 15.191406 5 16 5 Z M 5 8 L 27 8 L 27 17 L 5 17 Z M 16 14 C 15.449219 14 15 14.449219 15 15 C 15 15.550781 15.449219 16 16 16 C 16.550781 16 17 15.550781 17 15 C 17 14.449219 16.550781 14 16 14 Z M 5 19 L 27 19 L 27 24 L 5 24 Z"
-              ></path></svg
-          ></span>
+          <span class="sm:inline hidden"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="80" height="80"
+              viewBox="0 0 32 32">
+              <path fill="#65FF00"
+                d="M 16 3 C 14.136719 3 12.601563 4.277344 12.15625 6 L 3 6 L 3 26 L 29 26 L 29 6 L 19.84375 6 C 19.398438 4.277344 17.863281 3 16 3 Z M 16 5 C 16.808594 5 17.429688 5.386719 17.75 6 L 14.25 6 C 14.570313 5.386719 15.191406 5 16 5 Z M 5 8 L 27 8 L 27 17 L 5 17 Z M 16 14 C 15.449219 14 15 14.449219 15 15 C 15 15.550781 15.449219 16 16 16 C 16.550781 16 17 15.550781 17 15 C 17 14.449219 16.550781 14 16 14 Z M 5 19 L 27 19 L 27 24 L 5 24 Z">
+              </path>
+            </svg></span>
           <div class="text-white-text flex flex-col ml-5 justify-around">
             <span class="font-medium text-lg">ITC Group</span>
             <div class="text-globaltext">
@@ -140,131 +92,73 @@
 
     <div #message class="mt-20 w-full h-fit flex flex-col">
       <app-horizontal class="" [selfRight]="true"></app-horizontal>
-      <form
-        class="mt-20 w-full max-w-7xl m-auto flex flex-col"
-        [formGroup]="form"
-      >
+      <form class="mt-20 w-full max-w-7xl m-auto flex flex-col" [formGroup]="form">
         <!-- SEND -->
         <div class="flex flex-col self-start w-1/2">
           <span
-            class="text-transparent text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5"
-          >
-            <span
-              class="send-message w-full h-1 bg-gradient-to-r from-secondary to-primary absolute z-10 top-0"
-            ></span>
+            class="text-transparent text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text font-josefin relative py-5">
+            <span class="send-message w-full h-1 bg-gradient-to-r from-secondary to-primary absolute z-10 top-0"></span>
             Let's send message
           </span>
-          <span class="text-white-text text-base sm:text-lg"
-            >Don't wait until tomorrow. Let's send message to me</span
-          >
+          <span class="text-white-text text-base sm:text-lg">Don't wait until tomorrow. Let's send message to me</span>
         </div>
         <div class="flex flex-col sm:w-1/2 w-full self-start">
           <input
             class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
-            type="text"
-            placeholder="Your name"
-            formControlName="name"
-          />
-          <span
-            *ngIf="
+            type="text" placeholder="Your name" formControlName="name" />
+          <span *ngIf="
               form.controls.name.hasError('required') &&
               form.controls.name.touched
-            "
-            class="text-red-500 text-xs"
-          >
-            This field is required</span
-          >
-          <span
-            *ngIf="
+            " class="text-red-500 text-xs">
+            This field is required</span>
+          <span *ngIf="
               form.controls.name.hasError('pattern') &&
               form.controls.name.touched
-            "
-            class="text-red-500 text-xs"
-          >
-            Name should be text and number</span
-          >
-          <span
-            *ngIf="
+            " class="text-red-500 text-xs">
+            Name should be text and number</span>
+          <span *ngIf="
               form.controls.name.hasError('maxlength') &&
               form.controls.name.touched
-            "
-            class="text-red-500 text-xs"
-          >
-            Name should be less than 20 letter</span
-          >
+            " class="text-red-500 text-xs">
+            Name should be less than 20 letter</span>
           <input
             class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
-            type="text"
-            placeholder="Your email"
-            formControlName="email"
-          />
-          <span
-            *ngIf="
+            type="text" placeholder="Your email" formControlName="email" />
+          <span *ngIf="
               form.controls.email.hasError('required') &&
               form.controls.email.touched
-            "
-            class="text-red-500 text-xs"
-          >
-            This field is required</span
-          >
-          <span
-            *ngIf="
+            " class="text-red-500 text-xs">
+            This field is required</span>
+          <span *ngIf="
               form.controls.email.hasError('email') &&
               form.controls.email.touched
-            "
-            class="text-red-500 text-xs"
-          >
-            Email invalid</span
-          >
-          <input
-            #input
+            " class="text-red-500 text-xs">
+            Email invalid</span>
+          <input #input
             class="mt-10 h-15 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
-            type="text"
-            placeholder="Your phone"
-            formControlName="phone"
-            (keypress)="checkNumber(input.value, $event)"
-          />
-          <span
-            *ngIf="
+            type="text" placeholder="Your phone" formControlName="phone" (keypress)="keyPressOnlyNumber($event)" />
+          <span *ngIf="
               form.controls.phone.hasError('required') &&
               form.controls.phone.touched
-            "
-            class="text-red-500 text-xs"
-          >
-            This field is required</span
-          >
-          <span
-            *ngIf="
+            " class="text-red-500 text-xs">
+            This field is required</span>
+          <span *ngIf="
               form.controls.phone.hasError('max') && form.controls.phone.touched
-            "
-            class="text-red-500 text-xs"
-          >
-            Phonenumber should be less than 10 letter</span
-          >
+            " class="text-red-500 text-xs">
+            Phonenumber should be less than 10 letter</span>
           <textarea
             class="mt-10 h-28 p-4 rounded-md outline-none bg-header-color border border-border-color text-white-text"
-            type="text"
-            placeholder="Let's send message"
-            formControlName="message"
-          ></textarea>
-          <span
-            *ngIf="
+            type="text" placeholder="Let's send message" formControlName="message"></textarea>
+          <span *ngIf="
               form.controls.message.hasError('required') &&
               form.controls.message.touched
-            "
-            class="text-red-500 text-xs"
-          >
-            This field is required</span
-          >
-          <span
-            *ngIf="
+            " class="text-red-500 text-xs">
+            This field is required</span>
+          <span *ngIf="
               form.controls.message.hasError('maxlength') &&
               form.controls.message.touched
-            "
-            class="text-red-500 text-xs"
-          >
-            This field should be less than 300 letter</span
-          >
+            " class="text-red-500 text-xs">
+            This field should be less than 300 letter</span>
           <ng-container *ngIf="isLoading; else elseTemplate">
             <div class="mt-5 ml-2">
               <app-loading-small></app-loading-small>
@@ -272,11 +166,7 @@
           </ng-container>
           <ng-template #elseTemplate>
             <div class="mt-5">
-              <app-button
-                content="POST"
-                [disabled]="form.invalid"
-                (event)="submitContact()"
-              ></app-button>
+              <app-button content="POST" [disabled]="form.invalid" (event)="submitContact()"></app-button>
             </div>
           </ng-template>
         </div>

@@ -17,6 +17,7 @@ import { AuthFacade } from '@core/services/auth';
 import { LoadingSmallComponent } from '../loading-small/loading-small.component';
 import { catchError, of, tap } from 'rxjs';
 import { FileService } from '@core/services/file';
+import { CreatePostComponent } from '@core/ui/modal';
 
 @Component({
   selector: 'app-post-item',
@@ -80,5 +81,15 @@ export class PostItemComponent implements OnInit {
           ).subscribe();
         }
       });
+  }
+
+  openEditPost() {
+    this.dialog.open(CreatePostComponent, {
+      size: 'lg',
+      data: {
+        post: this.post,
+        textSubmit: 'SUBMIT'
+      },
+    });
   }
 }

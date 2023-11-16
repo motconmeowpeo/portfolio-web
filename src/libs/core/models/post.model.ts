@@ -10,9 +10,16 @@ export interface IPost {
   createBy: IUser;
 }
 
-export interface IPostCommand {
+export interface ICreatePostCommand {
   title: string;
   description: string;
   images: string[];
   createBy: string;
+}
+
+export interface IUpdatePostCommand {
+  id: string;
+  title: string;
+  description: string;
+  images: string[];
 }

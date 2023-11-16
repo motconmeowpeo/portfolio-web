@@ -18,11 +18,17 @@ import { FileService } from '@core/services/file';
 import { URL_IMAGE } from '@core/constants';
 import { AuthFacade } from '@core/services/auth';
 import { LoadingSmallComponent } from '@core/components/loading-small';
+import { IPost } from '@core/models';
 
 export interface ICreatePostForm {
   title: FormControl<string>;
   description: FormControl<string>;
   images: FormControl<File[]>;
+}
+
+export interface IData {
+  post: IPost,
+  textSubmit: string
 }
 
 @Component({
@@ -40,6 +46,8 @@ export interface ICreatePostForm {
 })
 export class CreatePostComponent implements OnInit, OnDestroy {
   readonly faImage = faImage;
+  readonly URL_IMAGE = URL_IMAGE;
+
   formCreate!: FormGroup<ICreatePostForm>;
   preview: string[] = [];
   sanitizedHtml!: SafeHtml;
@@ -48,6 +56,9 @@ export class CreatePostComponent implements OnInit, OnDestroy {
   unsubscribe$ = new Subject<void>();
 
   // Function to sanitize HTML
+  get data(): IData {
+    return this.dialogRef?.data
+  }
 
   ngOnInit(): void {
     this.createForm();
@@ -68,10 +79,11 @@ export class CreatePostComponent implements OnInit, OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
+
   private createForm() {
     const file: File[] = []; // Giá trị ban đầu cho form control "preview"
     this.formCreate = new FormGroup({
-      title: new FormControl('', {
+      title: new FormControl(this.data?.post.title || '', {
         nonNullable: true,
         validators: [
           Validators.required,
@@ -79,7 +91,7 @@ export class CreatePostComponent implements OnInit, OnDestroy {
         ],
         updateOn: 'change',
       }),
-      description: new FormControl('<p>Hello, world!</p>', {
+      description: new FormControl(this.data?.post.description || '<p>Hello, world!</p>', {
         nonNullable: true,
         validators: [Validators.required],
         updateOn: 'change',
@@ -110,12 +122,23 @@ export class CreatePostComponent implements OnInit, OnDestroy {
 
   async submitPost() {
     this.isLoading = true;
-    await this.fileService.upload(this.formCreate.controls.images.value);
-    this.user$.subscribe((user) => {
-      if (user) {
-        this.createPost(user.username);
-      }
-    });
+    if (!this.data) {
+      await this.fileService.upload(this.formCreate.controls.images.value);
+      this.user$.subscribe((user) => {
+        if (user) {
+          this.createPost(user.username);
+        }
+      });
+    }
+    else {
+      await this.fileService.upload(this.formCreate.controls.images.value);
+      this.user$.subscribe((user) => {
+        if (user) {
+          this.updatePost();
+        }
+      });
+    }
+
   }
 
   close() {
@@ -126,10 +149,31 @@ export class CreatePostComponent implements OnInit, OnDestroy {
     const images = this.formCreate.controls.images.value.map(
       (file) => file.name
     );
+
     this.postFacade
       .create({ ...this.formCreate.value, images, createBy })
       .pipe(
         tap(() => {
+          this.close();
+        }),
+        catchError((er) => {
+          this.close();
+          return er;
+        })
+      )
+      .subscribe();
+  }
+
+  async updatePost() {
+    const images = this.formCreate.controls.images.value.map(
+      (file) => file.name
+    );
+    const currentImages = this.data.post.images?.filter((img) => !images.includes(img)) || []
+    this.postFacade
+      .update({ ...this.formCreate.value, images, id: this.data.post.id })
+      .pipe(
+        tap(() => {
+          this.fileService.delete(currentImages)
           this.close();
         }),
         catchError((er) => {

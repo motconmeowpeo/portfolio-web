@@ -1,40 +1,21 @@
-<div
-  #header
-  class="header h-24 sm:p-0 p-4 duration-300 transition-all w-full z-50 bg-header-color flex items-center justify-center shadow-current sticky top-0"
->
+<div #header
+  class="header h-24 sm:p-0 p-4 duration-300 transition-all w-full z-50 bg-header-color flex items-center justify-center shadow-current sticky top-0">
   <div class="w-full h-full max-w-7xl m-auto flex justify-between items-center">
     <!-- LOGO -->
-    <div
-      class="sm:w-[160px] w-[80px] flex items-center justify-center"
-      data-aos="zoom-out-right"
-    >
-      <img
-        src="assets/logo/logo.png"
-        routerLink="/"
-        class="object-cover cursor-pointer h-full w-full"
-        alt=""
-      />
+    <div class="sm:w-[160px] w-[80px] flex items-center justify-center" data-aos="zoom-out-right">
+      <img src="assets/logo/logo.png" routerLink="/" class="object-cover cursor-pointer h-full w-full" alt="" />
     </div>
 
     <!-- MENU -->
-    <ul
-      class="text-white-text font-semibold flex items-center px-4 py-5"
-      data-aos="zoom-out-left"
-    >
-      <li
-        *ngFor="let item of NAV_MENU"
-        class="text-base sm:text-lg hover:text-secondary hover:-translate-y-px duration-300 transition-all cursor-pointer pl-4"
-        [routerLink]="item.path"
-        routerLinkActive="active-router"
-      >
+    <ul class="text-white-text font-semibold flex items-center px-4 py-5" data-aos="zoom-out-left">
+      <li *ngFor="let item of NAV_MENU"
+        class="text-base sm:text-lg hover:text-secondary hover:-translate-y-px duration-300 transition-all cursor-pointer sm:pl-10 pl-4"
+        [routerLink]="item.path" routerLinkActive="active-router">
         {{ item.name }}
       </li>
-      <li
-        *ngIf="user$ | async"
-        class="text-base sm:text-lg hover:text-secondary hover:-translate-y-px duration-300 transition-all cursor-pointer pl-4"
-        [routerLink]="'contact'"
-        routerLinkActive="active-router"
-      >
+      <li *ngIf="user$ | async"
+        class="text-base sm:text-lg hover:text-secondary hover:-translate-y-px duration-300 transition-all cursor-pointer sm:pl-10 pl-4"
+        [routerLink]="'contact'" routerLinkActive="active-router">
         Contact
       </li>
     </ul>
@@ -43,12 +24,36 @@
       <a *ngFor="let item of NAV_ICON" [href]="item.link" target="_blank">
         <fa-icon
           class="px-2 text-xl text-white-text cursor-pointer hover:text-primary hover:-translate-y-px duration-300 transition-all mr-2"
-          [icon]="item.icon"
-        ></fa-icon>
+          [icon]="item.icon"></fa-icon>
       </a>
       <div class="ml-2 hidden">
         <app-button content="LOG IN" [icon]="faRocket"></app-button>
       </div>
     </ul>
+    <div #menu *ngIf="user$ | async as user" class="w-12 h-12 relative">
+      <div class="absolute bottom-[2px] sm:right-2 right-0">
+        <app-menu position="right">
+          <!-- Trigger -->
+          <div class="flex items-center justify-center  p-1 cursor-pointer w-12 h-12 rounded hover:opacity-70"
+            menuTrigger>
+            <span
+              class="flex items-center cursor-pointer justify-center rounded-1/2 w-full h-full bg-primary text-white uppercase font-bold">
+              {{ user.email | slice : 0 : 1 }}
+            </span>
+          </div>
+
+          <!-- Menu -->
+          <ul class="flex flex-col bg-white shadow-base p-1 rounded text-xs" menuContent>
+            <ng-container>
+              <!-- Logout -->
+              <li class="inline-flex items-center px-3 py-2 cursor-pointer rounded hover:opacity-70" (click)="logOut()">
+                <fa-icon [icon]="faBack"></fa-icon>
+                <span class="whitespace-nowrap ml-2"> Log out</span>
+              </li>
+            </ng-container>
+          </ul>
+        </app-menu>
+      </div>
+    </div>
   </div>
 </div>

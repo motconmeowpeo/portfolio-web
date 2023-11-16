@@ -1,28 +1,15 @@
 <div class="post relative group border border-border-color">
-  <section
-    class="flex relative group cursor-pointer"
-    [routerLink]="['/post/' + post.id]"
-  >
-    <div class="image sm:h-96 h-80 w-full">
-      <img
-        *ngIf="post.images && post.images?.length"
-        [src]="URL_IMAGE + post.images[0]"
-        alt=""
-        class="h-full w-full overflow-hidden object-cover"
-      />
-      <img
-        *ngIf="!post.images || !post.images.length"
-        src="assets/common/news-1.webp"
-        alt=""
-        class="h-full w-full overflow-hidden object-cover"
-      />
+  <section class="flex relative group cursor-pointer" [routerLink]="['/post/' + post.id]">
+    <div class="image sm:h-96 h-60 w-full">
+      <img *ngIf="post.images && post.images?.length" [src]="URL_IMAGE + post.images[0]" alt=""
+        class="h-full w-full overflow-hidden object-cover" />
+      <img *ngIf="!post.images || !post.images.length" src="assets/common/news-1.webp" alt=""
+        class="h-full w-full overflow-hidden object-cover" />
     </div>
     <div
-      class="overlay absolute top-0 bottom-0 left-0 right-0 bg-black opacity-70 z-1 group-hover:opacity-90 duration-300 transition-all"
-    ></div>
-    <div
-      class="info flex flex-col ml-2 justify-between top-0 left-0 bottom-0 right-0 absolute sm:p-4 p-[2px]"
-    >
+      class="overlay absolute top-0 bottom-0 left-0 right-0 bg-black opacity-70 z-1 group-hover:opacity-90 duration-300 transition-all">
+    </div>
+    <div class="info flex flex-col ml-2 justify-between top-0 left-0 bottom-0 right-0 absolute sm:p-4 p-[2px]">
       <div class="flex flex-col justify-center h-full">
         <ng-container *ngIf="isLoading; else elseTemplate">
           <div class="h-full w-full flex items-center justify-center">
@@ -30,10 +17,7 @@
           </div>
         </ng-container>
         <ng-template #elseTemplate>
-          <span
-            class="text-white-text text-xl font-semibold self-center line-clamp-2"
-            >{{ post.title }}</span
-          >
+          <span class="text-white-text text-xl font-semibold self-center line-clamp-2">{{ post.title }}</span>
         </ng-template>
       </div>
       <div class="flex justify-between w-full">
@@ -41,43 +25,32 @@
           <fa-icon class="sm:text-base text-xs" [icon]="faUser"></fa-icon>
           <span class="sm:ml-2 ml-1 sm:text-sm text-xs">{{
             post.createBy
-          }}</span>
+            }}</span>
         </div>
         <div class="text-white text-xs">{{ formatDate(post.createAt) }}</div>
       </div>
     </div>
-    <div
-      class="absolute hidden group-hover:block top-2 right-2"
-      *ngIf="user$ | async"
-    >
+    <div class="absolute top-2 right-2" *ngIf="user$ | async">
       <app-menu position="right">
         <!-- Trigger -->
-        <i
-          class="flex items-center justify-center p-1 cursor-pointer w-6 h-6 rounded hover:bg-background-2"
-          menuTrigger
-        >
+        <i class="flex items-center justify-center p-1 cursor-pointer w-6 h-6 rounded hover:bg-background-2"
+          menuTrigger>
           <fa-icon class="text-white" [icon]="faEllipsis"></fa-icon>
         </i>
 
         <!-- Menu -->
-        <ul
-          class="flex flex-col bg-white shadow-base p-1 rounded text-xs"
-          menuContent
-        >
+        <ul class="flex flex-col bg-white shadow-base p-1 rounded text-xs" menuContent>
           <ng-container>
             <!-- Edit -->
-            <li
-              class="inline-flex items-center px-3 py-2 cursor-pointer rounded hover:bg-background-2"
-            >
+            <li (click)="openEditPost()"
+              class="inline-flex items-center px-3 py-2 cursor-pointer rounded hover:bg-background-2">
               <fa-icon class="mr-2" [icon]="faPen"></fa-icon>
               <span class="whitespace-nowrap"> Edit</span>
             </li>
 
             <!-- Complete -->
-            <li
-              (click)="openDeletePost()"
-              class="inline-flex items-center px-3 py-2 cursor-pointer rounded hover:bg-background-2"
-            >
+            <li (click)="openDeletePost()"
+              class="inline-flex items-center px-3 py-2 cursor-pointer rounded hover:bg-background-2">
               <fa-icon class="mr-2" [icon]="faTrash"></fa-icon>
               <span class="whitespace-nowrap"> Delete</span>
             </li>

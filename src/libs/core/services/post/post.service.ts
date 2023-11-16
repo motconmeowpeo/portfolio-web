@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, switchMap } from 'rxjs';
 import { HttpService } from '../http';
-import { IBaseParams } from '../../models/base.model';
-import { IPost, IPostCommand } from '../../models/post.model';
+import { IPost, ICreatePostCommand, IBaseParams, IUpdatePostCommand } from '@core/models';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthFacade } from '../auth/auth.facade';
 import { environment } from 'src/environments/environment';
@@ -22,13 +21,24 @@ export class PostService {
     return this.http.get<IPost>(`${API_POST}/${id}`);
   }
 
-  create(payload: Partial<IPostCommand>): Observable<IPost> {
+  create(payload: Partial<ICreatePostCommand>): Observable<IPost> {
     return this.authFacade.accessToken$.pipe(
       switchMap((token) => {
         const headers = new HttpHeaders({
           Authorization: token!,
         });
         return this.http.post<IPost>(`${API_POST}`, payload, { headers });
+      })
+    );
+  }
+
+  update(payload: Partial<IUpdatePostCommand>): Observable<IPost> {
+    return this.authFacade.accessToken$.pipe(
+      switchMap((token) => {
+        const headers = new HttpHeaders({
+          Authorization: token!,
+        });
+        return this.http.put<IPost>(`${API_POST}/${payload.id}`, payload, { headers });
       })
     );
   }

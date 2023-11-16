@@ -1,21 +1,13 @@
 <div class="blog w-full max-w-7xl m-auto mt-20 sm:p-0 p-4">
-  <div
-    class="grid grid-cols-1 sm:grid-cols-3 gap-8 w-full items-center"
-    *ngIf="user$ | async"
-  >
-    <div
-      class="group relative h-fit sm:w-full w-2/3 flex items-center cursor-pointer"
-      (click)="openModal()"
-    >
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 w-full items-center" *ngIf="user$ | async">
+    <div class="group relative h-fit sm:w-full w-2/3 flex items-center  cursor-pointer" (click)="openModal()">
       <button
-        class="h-15 p-4 w-full group-hover:border-primary text-globaltext transition-all duration-300 cursor-pointer rounded-md outline-none bg-header-color border border-border-color"
-      >
+        class="h-15 p-4 w-full group-hover:border-primary text-globaltext transition-all duration-300 cursor-pointer rounded-md outline-none bg-header-color border border-border-color">
         Click here to post
       </button>
       <fa-icon
-        class="absolute group-hover:text-primary transition-all duration-300 right-8 top-0 bottom-0 translate-y-[calc(50%-10px)] z-10 text-white"
-        [icon]="faPaperPlane"
-      ></fa-icon>
+        class="absolute group-hover:text-primary transition-all duration-300 sm:right-8 right-6 top-0 bottom-0 translate-y-[calc(50%-10px)] z-10 text-white"
+        [icon]="faPaperPlane"></fa-icon>
     </div>
   </div>
   <ng-container *ngIf="!isLoading; else loadingTemplate">

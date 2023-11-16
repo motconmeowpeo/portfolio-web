@@ -14,9 +14,11 @@
             ? 'border-primary border outline-primary'
             : 'border-primary-color border outline-primary-color'
         " type="text" placeholder="Title*" id="title" formControlName="title" autofocus></textarea>
-      <span *ngIf="formCreate.controls.title.hasError('required') && formCreate.controls.title.touched" class="text-red-500 text-xs">
+      <span *ngIf="formCreate.controls.title.hasError('required') && formCreate.controls.title.touched"
+        class="text-red-500 text-xs">
         This field is required</span>
-      <span *ngIf="formCreate.controls.title.hasError('pattern') && formCreate.controls.title.touched" class="text-red-500 text-xs">
+      <span *ngIf="formCreate.controls.title.hasError('pattern') && formCreate.controls.title.touched"
+        class="text-red-500 text-xs">
         Title should be text and number</span>
     </div>
     <div class="mt-5 p-4 pt-2">
@@ -34,10 +36,21 @@
 
     <input class="opacity-0" type="file" name="photo" id="upload-photo" multiple accept="image/*"
       (input)="onInputFile($event)" />
-    <div class="grid grid-cols-3 gap-2">
-      <img class="border max-h-44 h-44 w-full object-cover shadow-full" *ngFor="let item of preview" [src]="item" alt=""
-        srcset="" />
-    </div>
+    <ng-container *ngIf="preview.length;">
+      <div class="grid grid-cols-3 gap-2">
+        <img class="border max-h-44 h-44 w-full object-cover shadow-full" *ngFor="let item of preview" [src]="item"
+          alt="" srcset="" />
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!preview.length && data">
+      <div class="grid grid-cols-3 gap-2">
+        <img class="border max-h-44 h-44 w-full object-cover shadow-full" *ngFor="let item of data.post.images"
+          [src]="URL_IMAGE+item" alt="" srcset="" />
+      </div>
+    </ng-container>
+
+
+
 
     <div class="self-end px-4 mt-5 w-full flex justify-between">
       <app-button content="CANCEL" type="secondary" (event)="close()"></app-button>
@@ -51,7 +64,8 @@
           </div>
         </ng-container>
         <ng-template #elseTemplate>
-          <app-button content="POST" [disabled]="formCreate.invalid" (event)="submitPost()"></app-button>
+          <app-button [content]="data?.textSubmit ? data.textSubmit:'POST'" [disabled]="formCreate.invalid"
+            (event)="submitPost()"></app-button>
         </ng-template>
       </div>
     </div>

@@ -2,12 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconDefinition, faRocket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, MatIconModule],
+  imports: [CommonModule, FontAwesomeModule],
   templateUrl: './button.component.html',
 })
 export class ButtonComponent {

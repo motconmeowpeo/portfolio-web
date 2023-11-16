@@ -5,13 +5,13 @@ import {
   setActiveId,
   addEntities,
   deleteEntities,
+  updateEntities,
 } from '@ngneat/elf-entities';
 import { filter, of, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { store } from './post.store';
 import { PostService } from './post.service';
-import { IBaseParams } from '../../models/base.model';
-import { IPost, IPostCommand } from '../../models/post.model';
+import { IPost, ICreatePostCommand, IBaseParams, IUpdatePostCommand } from '@core/models';
 
 @Injectable({ providedIn: 'root' })
 export class PostFacade {
@@ -39,11 +39,21 @@ export class PostFacade {
     );
   }
 
-  create(payload: Partial<IPostCommand>) {
+  create(payload: Partial<ICreatePostCommand>) {
     return this.postService.create(payload).pipe(
       tap((post) => {
         const postMappingId = { ...post, id: post._id };
         store.update(addEntities(postMappingId, { prepend: true }));
+        store.update(setActiveId(postMappingId.id));
+      })
+    );
+  }
+
+  update(payload: Partial<IUpdatePostCommand>) {
+    return this.postService.update(payload).pipe(
+      tap((post) => {
+        const postMappingId = { ...post, id: post._id };
+        store.update(updateEntities(postMappingId.id, postMappingId));
         store.update(setActiveId(postMappingId.id));
       })
     );

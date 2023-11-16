@@ -22,6 +22,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { LoadingSmallComponent } from '@core/components/loading-small';
 import { ContactFacade } from '@core/services/contact';
 import { catchError, tap } from 'rxjs';
+import { inputFieldOnlyNumber } from '@core/until';
 
 export interface IContactForm {
   name: FormControl<string>,
@@ -137,12 +138,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }), catchError((err) => err)).subscribe()
   }
 
-  checkNumber(value: string, event: Event) {
-    const pattern = /([0 - 9])/g
-
-    console.log(pattern.test(value))
-    if (!pattern.test(value)) {
-      event.preventDefault()
+  keyPressOnlyNumber(event: any) {
+    const checkNotNumber = inputFieldOnlyNumber(event);
+    if (checkNotNumber) {
+      event.preventDefault();
     }
   }
 }
