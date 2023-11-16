@@ -108,19 +108,12 @@ export class CreatePostComponent implements OnInit, OnDestroy {
     });
   }
 
-  submitPost() {
+  async submitPost() {
     this.isLoading = true;
-
-    this.fileService.upload(this.formCreate.controls.images.value);
+    await this.fileService.upload(this.formCreate.controls.images.value);
     this.user$.subscribe((user) => {
       if (user) {
-        timer(3000)
-          .pipe(
-            tap(() => {
-              this.createPost(user.username);
-            })
-          )
-          .subscribe();
+        this.createPost(user.username);
       }
     });
   }

@@ -16,6 +16,7 @@ import { URL_IMAGE } from '@core/constants';
 import { AuthFacade } from '@core/services/auth';
 import { LoadingSmallComponent } from '../loading-small/loading-small.component';
 import { catchError, of, tap } from 'rxjs';
+import { FileService } from '@core/services/file';
 
 @Component({
   selector: 'app-post-item',
@@ -38,7 +39,8 @@ export class PostItemComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private postFacade: PostFacade,
     private dialog: DialogService,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private fileService: FileService
   ) { }
   formatDate(date: string | Date) {
     return format(new Date(date), 'HH:mm dd-MM-yyyy');
@@ -63,8 +65,14 @@ export class PostItemComponent implements OnInit {
         if (result === ModalCloseStatus.COMPLETE) {
           this.isLoading = true;
           this.postFacade.delete(this.post._id).pipe(
-            tap(() => {
-              this.isLoading = false;
+            tap(async () => {
+              if (this.post.images) {
+                await this.fileService.delete(this.post.images)
+                this.isLoading = false;
+              }
+              else {
+                this.isLoading = false;
+              }
             }), catchError(er => {
               this.isLoading = false;
               return of(er)
