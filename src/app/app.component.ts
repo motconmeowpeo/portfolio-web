@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { CountService } from '@core/services/count';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ import {
 })
 export class AppComponent implements OnInit {
   title = 'portfolio';
-  ngOnInit(): void {}
+  constructor(private countService: CountService) { }
+  ngOnInit(): void { this.countService.count().subscribe() }
   @ViewChild('cursor') cursorRef!: ElementRef<HTMLDivElement>;
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {

@@ -1,5 +1,6 @@
 <div
-  class="sm:p-0 p-4 footer w-full max-w-7xl m-auto grid sm:grid-cols-1 md:grid-cols-4 grid-cols-1 md:place-items-start sm:place-items-center place-items-center sm:gap-20 gap-5">
+  class="pb-20 p-4 relative footer w-full max-w-7xl m-auto grid sm:grid-cols-1 md:grid-cols-4 grid-cols-1 md:place-items-start sm:place-items-center place-items-center sm:gap-20 gap-5"
+>
   <!-- LOGO -->
   <div class="min-h-[240px] flex flex-col justify-between">
     <div class="h-24 w-full flex justify-center">
@@ -11,46 +12,77 @@
     </div>
     <div class="flex justify-between mt-5 items-end">
       <a *ngFor="let item of NAV_ICON" [href]="item.link" target="_blank">
-        <fa-icon class="px-2 text-3xl cursor-pointer text-primary hover:-translate-y-px duration-300 transition-all"
-          [icon]="item.icon"></fa-icon>
+        <fa-icon
+          class="px-2 text-3xl cursor-pointer text-primary hover:-translate-y-px duration-300 transition-all"
+          [icon]="item.icon"
+        ></fa-icon>
       </a>
     </div>
   </div>
 
   <!-- Get in touch -->
-  <div class="min-h-[240px] flex flex-col sm:justify-start sm:items-start justify-center items-center">
-    <span class="text-white-text flex items-center h-24 text-2xl font-semibold">Get in Touch</span>
+  <div
+    class="min-h-[240px] flex flex-col sm:justify-start sm:items-start justify-center items-center"
+  >
+    <span class="text-white-text flex items-center h-24 text-2xl font-semibold"
+      >Get in Touch</span
+    >
     <ul class="p-0 m-0 flex flex-col justify-between list-none">
-      <li class="text-globaltext mt-2 hover:text-primary cursor-pointer duration-300 transition-all"
-        *ngFor="let item of GET_IN_TOUCH">
+      <li
+        class="text-globaltext mt-2 hover:text-primary cursor-pointer duration-300 transition-all"
+        *ngFor="let item of GET_IN_TOUCH"
+      >
         <fa-icon [icon]="item.icon"></fa-icon>
         <span class="ml-4">{{ item.text }}</span>
       </li>
     </ul>
-    <app-button content="SEND MESSAGE" [icon]="faMessage" className="h-10 mt-5"
-      (event)="gotoSendMessage()"></app-button>
+    <app-button
+      content="SEND MESSAGE"
+      [icon]="faMessage"
+      className="h-10 mt-5"
+      (event)="gotoSendMessage()"
+    ></app-button>
   </div>
 
   <!-- Service -->
-  <div class="min-h-[240px] flex flex-col sm:justify-start sm:items-start justify-center items-center">
-    <span class="text-white-text flex items-center h-24 text-2xl font-semibold">Our Service</span>
-    <ul class=" p-0 m-0  flex flex-col justify-between list-none">
-      <li class="text-globaltext mt-2 hover:text-primary cursor-pointer duration-300 transition-all"
-        *ngFor="let item of OUR_SERVICES">
+  <div
+    class="min-h-[240px] flex flex-col sm:justify-start sm:items-start justify-center items-center"
+  >
+    <span class="text-white-text flex items-center h-24 text-2xl font-semibold"
+      >Our Service</span
+    >
+    <ul class="p-0 m-0 flex flex-col justify-between list-none">
+      <li
+        class="text-globaltext mt-2 hover:text-primary cursor-pointer duration-300 transition-all"
+        *ngFor="let item of OUR_SERVICES"
+      >
         <span class="">{{ item }}</span>
       </li>
     </ul>
   </div>
 
   <!-- Popular -->
-  <div class="min-h-[240px] flex flex-col sm:justify-start sm:items-start justify-center items-center">
-    <span class="text-white-text flex items-center h-24 text-2xl font-semibold">Popular Tags</span>
+  <div
+    class="min-h-[240px] flex flex-col sm:justify-start sm:items-start justify-center items-center"
+  >
+    <span class="text-white-text flex items-center h-24 text-2xl font-semibold"
+      >Popular Tags</span
+    >
     <div class="grid grid-cols-2 gap-4">
       <button
         class="text-globaltext border border-globaltext hover:text-primary hover:border-primary p-2 duration-300 transition-all"
-        *ngFor="let item of POPULAR_TAGS">
+        *ngFor="let item of POPULAR_TAGS"
+      >
         {{ item }}
       </button>
     </div>
+  </div>
+
+  <div class="absolute bottom-0 left-0 right-0" *ngIf="count$ | async as count">
+    <app-button
+      className="h-10 m-auto"
+      [icon]="faEye"
+      [content]="count.count + ''"
+    ></app-button>
   </div>
 </div>

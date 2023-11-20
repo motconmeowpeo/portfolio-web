@@ -5,6 +5,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonComponent } from '@core/ui';
 import { faMessage } from '@fortawesome/free-solid-svg-icons';
 import { OUR_SERVICES, POPULAR_TAGS } from '../../constants/menu.constant';
+import { CountService } from '@core/services/count';
+import { faEye } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-footer',
@@ -18,7 +20,11 @@ export class FooterComponent {
   readonly OUR_SERVICES = OUR_SERVICES;
   readonly POPULAR_TAGS = POPULAR_TAGS;
   readonly faMessage = faMessage;
+  readonly faEye = faEye;
+  count$ = this.countService.getCount()
   @Output() goToSend: EventEmitter<void> = new EventEmitter<void>();
+
+  constructor(private countService: CountService) { }
 
   gotoSendMessage() {
     this.goToSend.emit();
