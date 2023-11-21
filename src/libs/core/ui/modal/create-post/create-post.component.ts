@@ -50,7 +50,7 @@ export interface IData {
 export class CreatePostComponent implements OnInit, OnDestroy {
   readonly faImage = faImage;
   readonly URL_IMAGE = URL_IMAGE;
-
+  readonly REGEX_VN = /^[0-9a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$/g
   toolbar: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],
@@ -83,9 +83,7 @@ export class CreatePostComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private sanitizer: DomSanitizer,
     private cd: ChangeDetectorRef,
-    private dialog: DialogService,
     private dialogRef: DialogRef,
     private postFacade: PostFacade,
     private authFacade: AuthFacade,
@@ -106,7 +104,7 @@ export class CreatePostComponent implements OnInit, OnDestroy {
         nonNullable: true,
         validators: [
           Validators.required,
-          Validators.pattern(/^[a-zA-Z0-9\s]+$/),
+          Validators.pattern(this.REGEX_VN),
         ],
         updateOn: 'change',
       }),

@@ -16,9 +16,9 @@ export class CountService {
         return this.http.get<{ count: number }>(API_COUNT);
     }
 
-    count(): Observable<{ count: number }> {
+    count(ip: string): Observable<{ count: number }> {
 
-        return this.http.post<{ count: number }>(`${API_COUNT}`, {});
+        return this.http.post<{ count: number }>(`${API_COUNT}`, { ip });
     }
 
 

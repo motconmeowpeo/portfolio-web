@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   Component,
   ElementRef,
@@ -6,6 +7,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CountService } from '@core/services/count';
+import { from, lastValueFrom, of, switchMap, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +17,16 @@ import { CountService } from '@core/services/count';
 })
 export class AppComponent implements OnInit {
   title = 'portfolio';
-  constructor(private countService: CountService) { }
-  ngOnInit(): void { this.countService.count().subscribe() }
+  constructor(private countService: CountService, private httpClient: HttpClient) { }
+  ngOnInit(): void {
+    this.httpClient.get('https://api.db-ip.com/v2/free/self', {
+      headers: new HttpHeaders({
+        'origin': environment.currentUrl,
+      })
+    }).pipe(
+      switchMap(({ ipAddress }: any) => this.countService.count(ipAddress))
+    ).subscribe()
+  }
   @ViewChild('cursor') cursorRef!: ElementRef<HTMLDivElement>;
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
@@ -33,4 +44,5 @@ export class AppComponent implements OnInit {
       this.cursorRef.nativeElement.style.top = `${event.pageY}px`;
     }
   }
+
 }

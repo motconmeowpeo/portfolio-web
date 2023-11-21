@@ -15,7 +15,7 @@ export const NAV_ICON = [
   { icon: faInstagram, link: 'https://www.instagram.com/hien.nguyenxd/' },
   {
     icon: faLinkedin,
-    link: 'https://www.linkedin.com/in/nguyen-hien-nguyen-607197241/',
+    link: 'https://www.linkedin.com/in/nguyen-hien-nguyen/',
   },
   {
     icon: faGithub,
