@@ -112,7 +112,7 @@ export const EXP_ITEMS = [
     label: 'ITC Group',
     time: 'June 2023 - Now',
     content: 'Software Engineer',
-    desc: 'Be a software engineer. Join projects',
+    desc: 'As a software engineer. Join projects',
     logo: 'itcgroup.png'
   },
 ]

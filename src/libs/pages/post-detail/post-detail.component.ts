@@ -11,6 +11,7 @@ import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-post-detail',
@@ -33,6 +34,7 @@ export class PostDetailComponent implements OnInit {
   post$ = this.postFacade.post$;
   safeHtml!: SafeHtml;
   search!: string;
+  isActive = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -64,5 +66,4 @@ export class PostDetailComponent implements OnInit {
   sanitizeHtml(post: IPost) {
     this.safeHtml = this.sanitizer.bypassSecurityTrustHtml(post.description);
   }
-
 }

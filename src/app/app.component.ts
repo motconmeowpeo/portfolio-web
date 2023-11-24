@@ -6,9 +6,11 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { CountService } from '@core/services/count';
-import { from, lastValueFrom, of, switchMap, tap } from 'rxjs';
+import { of, switchMap, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { faChevronLeft, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -17,32 +19,51 @@ import { environment } from 'src/environments/environment';
 })
 export class AppComponent implements OnInit {
   title = 'portfolio';
-  constructor(private countService: CountService, private httpClient: HttpClient) { }
+  count$ = this.countService.count$;
+  readonly faChevronUp = faChevronUp;
+  isStandingTop = true;
+  constructor(
+    private countService: CountService,
+    private httpClient: HttpClient,
+    private router: Router
+  ) { }
   ngOnInit(): void {
-    this.httpClient.get('https://api.db-ip.com/v2/free/self', {
-      headers: new HttpHeaders({
-        'origin': environment.currentUrl,
-      })
-    }).pipe(
-      switchMap(({ ipAddress }: any) => this.countService.count(ipAddress))
-    ).subscribe()
-  }
-  @ViewChild('cursor') cursorRef!: ElementRef<HTMLDivElement>;
-  @HostListener('document:mousemove', ['$event'])
-  onMouseMove(event: MouseEvent) {
-    if (this.cursorRef) {
-      this.cursorRef.nativeElement.style.left = `${event.pageX}px`;
-      this.cursorRef.nativeElement.style.top = `${event.pageY}px`;
-      this.cursorRef.nativeElement.style.display = `block`;
+    this.countService.getCount().subscribe();
+    const cookieArr = document.cookie
+      .split('; ')
+      .find((item) => item === 'visited');
+    if (!cookieArr) {
+      document.cookie = 'visited';
+      this.httpClient
+        .get('https://api.db-ip.com/v2/free/self', {
+          headers: new HttpHeaders({
+            origin: environment.currentUrl,
+          }),
+        })
+        .pipe(
+          switchMap((value) => {
+            return this.countService.count(value);
+          })
+        )
+        .subscribe();
     }
   }
+
   @HostListener('document:scroll', ['$event'])
   onScroll(event: MouseEvent) {
-    if (this.cursorRef) {
-      this.cursorRef.nativeElement.style.left = `${event.pageX}px`;
-
-      this.cursorRef.nativeElement.style.top = `${event.pageY}px`;
-    }
+    this.isStandingTop = !document.documentElement.scrollTop
   }
 
+  gotoSendMessage() {
+    this.router.navigateByUrl('/home?goto=true');
+  }
+
+  scrollToTop(): void {
+    // scroll to the top of the body
+    return document.body.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'start'
+    });
+  }
 }

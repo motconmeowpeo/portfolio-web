@@ -4,6 +4,7 @@ import { BlogsComponent } from '../libs/pages/blogs/blogs.component';
 import { LoginGuard } from '@pages/login';
 import { PostDetailComponent } from '../libs/pages/post-detail/post-detail.component';
 import { ContactGuard } from '@pages/contact';
+import { PostDetailGuard } from '../libs/pages/post-detail/post-detail.guard';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
     path: 'post/:id',
     loadComponent: () =>
       import('@pages/post-detail').then((page) => page.PostDetailComponent),
+    canActivate: [PostDetailGuard],
+    data: {
+      component: PostDetailComponent
+    }
   },
   {
     path: 'admin',

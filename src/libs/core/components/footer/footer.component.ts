@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GET_IN_TOUCH, NAV_ICON } from '@core/constants';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -21,8 +21,8 @@ export class FooterComponent {
   readonly POPULAR_TAGS = POPULAR_TAGS;
   readonly faMessage = faMessage;
   readonly faEye = faEye;
-  count$ = this.countService.getCount()
   @Output() goToSend: EventEmitter<void> = new EventEmitter<void>();
+  @Input() count!: number
 
   constructor(private countService: CountService) { }
 

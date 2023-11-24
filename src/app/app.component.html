@@ -1,3 +1,11 @@
 <!-- <div #cursor class="loader hidden absolute z-[9999] cursor-none"></div> -->
 <app-header></app-header>
 <router-outlet></router-outlet>
+<button *ngIf="!isStandingTop"
+    class="fixed bottom-5 right-5 p-2 h-10 w-10 flex items-center slideIn justify-center rounded-1/2 bg-gradient-to-r from-primary to-secondary z-[999999]  transition-all duration-500"
+    (click)="scrollToTop()">
+    <fa-icon class="spin text-white" [icon]="faChevronUp"></fa-icon>
+</button>
+<div class="py-20 bg-header-color mt-20">
+    <app-footer [count]="(count$ | async)!" (goToSend)="gotoSendMessage()"></app-footer>
+</div>

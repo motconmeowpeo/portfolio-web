@@ -8,6 +8,7 @@ export interface IPost {
   images?: string[];
   createAt: string;
   createBy: IUser;
+  isActive: boolean;
 }
 
 export interface ICreatePostCommand {

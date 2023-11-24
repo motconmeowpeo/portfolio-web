@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from '@core/components';
+import { FooterComponent, HeaderComponent } from '@core/components';
 import { HttpService } from '@core/services/http';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +13,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxEditorModule } from 'ngx-editor';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBLmyT1VQYsb-Wo8GV_dUp1evDd_cvXy7M',
@@ -29,8 +30,10 @@ const firebaseConfig = {
     BrowserModule,
     AppRoutingModule,
     HeaderComponent,
+    FooterComponent,
     HttpClientModule,
     BrowserAnimationsModule,
+    FontAwesomeModule,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

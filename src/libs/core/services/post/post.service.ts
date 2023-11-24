@@ -21,6 +21,17 @@ export class PostService {
     return this.http.get<IPost>(`${API_POST}/${id}`);
   }
 
+  inactive(id: string, isActive: boolean): Observable<IPost> {
+    return this.authFacade.accessToken$.pipe(
+      switchMap((token) => {
+        const headers = new HttpHeaders({
+          Authorization: token!,
+        });
+        return this.http.put<IPost>(`${API_POST}/inactive/${id}`, { isActive }, { headers });
+      })
+    );
+  }
+
   create(payload: Partial<ICreatePostCommand>): Observable<IPost> {
     return this.authFacade.accessToken$.pipe(
       switchMap((token) => {

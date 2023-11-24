@@ -78,9 +78,7 @@ export class BlogsComponent implements OnInit {
       })
     ).subscribe()
   }
-  gotoSendMessage() {
-    this.router.navigateByUrl('/home?goto=true');
-  }
+
 
   pageIndexChange(index: number) { }
 

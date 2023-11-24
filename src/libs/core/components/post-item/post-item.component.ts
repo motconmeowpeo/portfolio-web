@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { format } from 'date-fns';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { faPen, faTrash, faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash, faEye } from '@fortawesome/free-regular-svg-icons';
 import { PostFacade } from '@core/services/post';
 import { DialogService } from '@ngneat/dialog';
 import { ConfirmDeleteComponent } from '../../ui/modal/confirm-delete/confirm-delete.component';
@@ -30,6 +31,8 @@ export class PostItemComponent implements OnInit {
   readonly faTrash = faTrash;
   readonly faPen = faPen;
   readonly faEllipsis = faEllipsis;
+  readonly faEyeSlash = faEyeSlash;
+  readonly faEye = faEye;
   readonly URL_IMAGE = URL_IMAGE;
   isLoading = false;
   user$ = this.authFacade.user$;
@@ -92,5 +95,9 @@ export class PostItemComponent implements OnInit {
         textSubmit: 'SUBMIT'
       },
     });
+  }
+
+  inactivePost() {
+    this.postFacade.inactive(this.post.id, !this.post.isActive).subscribe()
   }
 }

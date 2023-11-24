@@ -7,11 +7,16 @@ import {
   deleteEntities,
   updateEntities,
 } from '@ngneat/elf-entities';
-import { filter, of, tap } from 'rxjs';
+import { Observable, filter, of, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { store } from './post.store';
 import { PostService } from './post.service';
-import { IPost, ICreatePostCommand, IBaseParams, IUpdatePostCommand } from '@core/models';
+import {
+  IPost,
+  ICreatePostCommand,
+  IBaseParams,
+  IUpdatePostCommand,
+} from '@core/models';
 
 @Injectable({ providedIn: 'root' })
 export class PostFacade {
@@ -21,7 +26,7 @@ export class PostFacade {
     filter((post) => !!post)
   );
   constructor(private postService: PostService) { }
-  getAll(params?: IBaseParams) {
+  getAll(params?: IBaseParams): Observable<IPost[]> {
     return this.postService.getAll(params).pipe(
       tap((posts) => {
         const postsMappingId = posts.map((post) => ({ ...post, id: post._id }));
@@ -30,7 +35,7 @@ export class PostFacade {
     );
   }
 
-  getPostById(id: string) {
+  getPostById(id: string): Observable<IPost> {
     return this.postService.getPostById(id).pipe(
       tap((post) => {
         store.update(setEntities([post]));
@@ -39,7 +44,17 @@ export class PostFacade {
     );
   }
 
-  create(payload: Partial<ICreatePostCommand>) {
+  inactive(id: string, isActive: boolean): Observable<IPost> {
+    return this.postService.inactive(id, isActive).pipe(
+      tap((post) => {
+        const postMappingId = { ...post, id: post._id };
+        store.update(updateEntities(postMappingId.id, postMappingId));
+        store.update(setActiveId(postMappingId.id));
+      })
+    );
+  }
+
+  create(payload: Partial<ICreatePostCommand>): Observable<IPost> {
     return this.postService.create(payload).pipe(
       tap((post) => {
         const postMappingId = { ...post, id: post._id };
@@ -49,7 +64,7 @@ export class PostFacade {
     );
   }
 
-  update(payload: Partial<IUpdatePostCommand>) {
+  update(payload: Partial<IUpdatePostCommand>): Observable<IPost> {
     return this.postService.update(payload).pipe(
       tap((post) => {
         const postMappingId = { ...post, id: post._id };
@@ -59,7 +74,7 @@ export class PostFacade {
     );
   }
 
-  delete(id: string) {
+  delete(id: string): Observable<IPost> {
     return this.postService
       .delete(id)
       .pipe(tap((post) => store.update(deleteEntities(id))));
